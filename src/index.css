@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Inter:wght@300..800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   Düzce Aspava — Warm Premium Theme
+   Semantic color tokens (runtime-themeable via CSS variables).
+   Dark is the default; .light flips the same variables.
+   ============================================================ */
+
+:root {
+  /* Warm charcoal surfaces (default / dark) */
+  --c-page:      #17120F;
+  --c-card:      #221A15;
+  --c-card-2:    #2C211B;
+  --c-line:      #3A2D24;
+  --c-ink:       #F7EFE8;
+  --c-ink-soft:  #C9B8AC;
+  --c-ink-faint: #8A7A6E;
+
+  /* Brand accents */
+  --c-brand:     #E0531F; /* Ember */
+  --c-brand-2:   #C2451A; /* Ember hover */
+  --c-gold:      #E5A93C; /* Warm gold */
+  --c-on-brand:  #1A120D; /* Text on ember fills */
+}
+
+html.light {
+  /* Warm cream surfaces (daylight) */
+  --c-page:      #F7F1E9;
+  --c-card:      #FFFFFF;
+  --c-card-2:    #F3EBE1;
+  --c-line:      #E7DCCD;
+  --c-ink:       #2A211B;
+  --c-ink-soft:  #5C4F45;
+  --c-ink-faint: #8B7D70;
+
+  --c-brand:     #D24A18;
+  --c-brand-2:   #B23F14;
+  --c-gold:      #B5832A;
+  --c-on-brand:  #FFFFFF;
+}
+
+/* Expose tokens as Tailwind utilities (bg-page, text-ink, border-line, ...).
+   `inline` keeps the var() reference so .light overrides apply at runtime. */
+@theme inline {
+  --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-page:       var(--c-page);
+  --color-card:       var(--c-card);
+  --color-card-2:     var(--c-card-2);
+  --color-line:       var(--c-line);
+  --color-ink:        var(--c-ink);
+  --color-ink-soft:   var(--c-ink-soft);
+  --color-ink-faint:  var(--c-ink-faint);
+  --color-brand:      var(--c-brand);
+  --color-brand-2:    var(--c-brand-2);
+  --color-gold:       var(--c-gold);
+  --color-on-brand:   var(--c-on-brand);
+
+  /* Backward-compatible aliases for not-yet-migrated components */
+  --color-brand-primary: var(--c-brand);
+  --color-brand-dark:    var(--c-page);
+  --color-brand-card:    var(--c-card);
+  --color-brand-gold:    var(--c-gold);
+}
+
+html, body, #root {
+  background-color: var(--c-page);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Display serif niceties */
+.font-display {
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-brand); }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; }
+
+/* ---------- Premium card interaction ---------- */
+.premium-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+.premium-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--c-brand) 45%, transparent);
+  box-shadow: 0 18px 40px -16px rgba(0,0,0,0.55),
+              0 0 0 1px color-mix(in srgb, var(--c-brand) 12%, transparent);
+}
+html.light .premium-card:hover {
+  box-shadow: 0 18px 40px -18px rgba(80,40,15,0.22);
+}
+
+/* Warm ambient glow for highlights */
+.warm-glow { box-shadow: 0 0 38px -12px color-mix(in srgb, var(--c-brand) 35%, transparent); }
+
+/* ---------- Shimmer (image loading) ---------- */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.shimmer-bg {
+  background: linear-gradient(90deg,
+    var(--c-card) 25%,
+    var(--c-card-2) 50%,
+    var(--c-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* Soft fade-in helper */
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.animate-fade-in { animation: fade-in 0.4s ease both; }

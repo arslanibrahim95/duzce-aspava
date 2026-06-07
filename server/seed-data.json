@@ -1,0 +1,869 @@
+{
+  "categories": [
+    {
+      "id": "kebaplar",
+      "name": "Kebaplar",
+      "icon": "Flame",
+      "sort_order": 0
+    },
+    {
+      "id": "donerler",
+      "name": "Dönerler",
+      "icon": "Flame",
+      "sort_order": 1
+    },
+    {
+      "id": "pideler",
+      "name": "Pideler",
+      "icon": "Pizza",
+      "sort_order": 2
+    },
+    {
+      "id": "kiremitler",
+      "name": "Kiremitler",
+      "icon": "Flame",
+      "sort_order": 3
+    },
+    {
+      "id": "icecekler",
+      "name": "İçecekler",
+      "icon": "GlassWater",
+      "sort_order": 4
+    }
+  ],
+  "items": [
+    {
+      "id": "kebap-adana",
+      "name": "Adana Kebap",
+      "description": "Zırhla elde çekilmiş %100 kuzu kıyması, kuyruk yağı, tuz ve pul biberle yoğrulup kömür ateşinde pişen acılı geleneksel lezzet. Sumaklı piyaz soğan, fırınlanmış domates ve biber ile sıcak tırnak pide eşliğinde servis edilir.",
+      "price": 340,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-adana.jpg",
+      "isPopular": true,
+      "isSpicy": true,
+      "ingredients": [
+        "Zırhla Çekilmiş Kuzu Eti",
+        "Hakiki Kuzu Kuyruk Yağı",
+        "Közlenmiş Domates",
+        "Közlenmiş Biber",
+        "Sumaklı Piyaz Soğan",
+        "Tırnak Pide",
+        "Özel Pul Biber ve Kaya Tuzu"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 0
+    },
+    {
+      "id": "kebap-urfa",
+      "name": "Urfa Kebap",
+      "description": "Zırh kıyması ile acısız olarak hazırlanan, köz ateşinde lokum gibi pişen porsiyon Urfa kebabı. Çıtır sıcak tırnak pide, sumaklı piyaz soğan, köz domates ve biberle servis edilir.",
+      "price": 340,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-urfa.jpg",
+      "isSpicy": false,
+      "ingredients": [
+        "Zırhla Çekilmiş Acısız Kuzu Kıyması",
+        "Kuzu Kuyruk Yağı",
+        "Tırnak Pide",
+        "Sumaklı Soğan",
+        "Közlenmiş Yeşil Biber",
+        "Közlenmiş Domates",
+        "Kaya Tuzu"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 1
+    },
+    {
+      "id": "kebap-beyti",
+      "name": "Beyti Kebap",
+      "description": "Özel sarımsak ve baharatlarla harmanlanmış kebap kıymasının ince sıcak lavaşa sarılarak dilimlenmesi, üzerine eritilmiş köpüklü tereyağı, özel domatesli salçalı sos ve süzme yoğurt ile sunumu.",
+      "price": 390,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-beyti.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Zırh Kebap Kıyması",
+        "Sıcak Tandır Lavaşı",
+        "Süzme Tava Yoğurdu",
+        "Köpüklü Tereyağı",
+        "Sarımsak",
+        "Özel Domates Sosu",
+        "Közlenmiş Biber ve Domates"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 2
+    },
+    {
+      "id": "kebap-patlican",
+      "name": "Patlıcanlı Kebap",
+      "description": "Köz ateşinde ağır yavaş lokum gibi pişen taze bostan patlıcanı halkaları ve arasına yerleştirilen özel baharatlı kebap köftelerinin muhteşem lezzet uyumu. Tırnak pide ve sumaklı piyaz eşliğinde sunulur.",
+      "price": 380,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-patlican.jpg",
+      "isSpicy": false,
+      "ingredients": [
+        "Taze Bostan Patlıcanı",
+        "Zırh Kıyması Köftesi",
+        "Tırnak Pide",
+        "Sumaklı Maydanozlu Piyaz",
+        "Köz Biber",
+        "Köz Domates"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 3
+    },
+    {
+      "id": "kebap-copsis",
+      "name": "Çöp Şiş",
+      "description": "İncecik dilimlenmiş marine kuzu bonfile etlerinin ve aralarına dizilen kuyruk yağının küçük tahta şişlerde kömür mangalında pişen efsane çıtır lezzeti. Tırnak pide ve sumaklı soğanla servis edilir.",
+      "price": 360,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-copsis.jpg",
+      "isSpicy": false,
+      "ingredients": [
+        "Marine Edilmiş Kuzu Bonfile",
+        "Körpe Kuzu Kuyruk Yağı",
+        "Kekik ve Zeytinyağı Marinası",
+        "Tırnak Pide",
+        "Sumaklı Soğan Piyazı",
+        "Közlenmiş Biber ve Domates"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 4
+    },
+    {
+      "id": "kebap-kuzusis",
+      "name": "Kuzu Şiş",
+      "description": "Özel süt, kekik ve kaya tuzu marinasyonunda dinlendirilmiş körpe kuzu eti küplerinin köz üzerinde kurutulmadan sulu ve lokum kıvamında hazırlanması. Tırnak pide, köz biber-domates ve soğan piyazıyla servis edilir.",
+      "price": 410,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-kuzusis.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Marine Kuzu But Küpleri",
+        "Süt, Zeytinyağı ve Sarımsak Marinası",
+        "Tırnak Pide",
+        "Sumaklı Sarımsaklı Piyaz Soğan",
+        "Köz Biber",
+        "Köz Domates"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 5
+    },
+    {
+      "id": "kebap-cigersis",
+      "name": "Ciğer Şiş",
+      "description": "Günlük taze kuzu ciğeri parçalarının kuyruk yağı ile mangalda közlenip ince tırnak pide yatağında kimyonlu soğan piyazı eşliğinde servis edilmesi.",
+      "price": 370,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-cigersis.jpg",
+      "ingredients": [
+        "Günlük Taze Kuzu Ciğeri",
+        "Körpe Kuyruk Yağı",
+        "Özel Kimyon Aromalı Baharat Karışımı",
+        "Tırnak Pide",
+        "Kimyonlu Sumaklı Maydanozlu Soğan Piyazı"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 6
+    },
+    {
+      "id": "kebap-tavuksis",
+      "name": "Tavuk Şiş",
+      "description": "Yoğurt, biber salçası ve özel baharat sosunda marine edilmiş tavuk göğsü şişlerinin köz mangalda sulu sulu pişirilmesi. Sıcak pide eşliğinde sunulur.",
+      "price": 290,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-tavuksis.jpg",
+      "ingredients": [
+        "Tavuk Göğsü Küpleri",
+        "Süt, Yoğurt ve Salça Marinası",
+        "Tırnak Pide",
+        "Közlenmiş Yeşil Biber",
+        "Közlenmiş Domates",
+        "Sumaklı Soğan"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 7
+    },
+    {
+      "id": "kebap-kanat",
+      "name": "Tavuk Kanat",
+      "description": "Yoğurtlu tuzlu özel sosta marine edilmiş taze tavuk kanatlarının mangal ateşinde çıtır çıtır kızartılarak yeşillik, çıtır patates tava ve tırnak pide eşliğinde sunumu.",
+      "price": 290,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-kanat.jpg",
+      "ingredients": [
+        "Tavuk Kanat",
+        "Özel Kanat Sosu Marinası",
+        "El Yapımı Çıtır Patates Kızartması",
+        "Tırnak Pide",
+        "Söğüş Limonlu Maydanoz"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 8
+    },
+    {
+      "id": "kebap-alinazik-kuzu",
+      "name": "Ali Nazik Kuzu",
+      "description": "Sıcak közlenmiş bostan patlıcanının sarımsaklı süzme yoğurtla dövülerek oluşturduğu nefis yatak üzerinde, hakiki taze tereyağında kavrulmuş lokum kuzu eti parçaları.",
+      "price": 420,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-alinazik-kuzu.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Sote Kuzu Eti parçaları",
+        "Közlenmiş Bostan Patlıcanı",
+        "Sarımsaklı Süzme Yoğurt",
+        "Yemeklik Tereyağı",
+        "Kırmızı Pul Biber",
+        "Taze Maydanoz Süsleme"
+      ],
+      "customizable": false,
+      "allergens": [
+        "süt"
+      ],
+      "sort_order": 9
+    },
+    {
+      "id": "kebap-alinazik-dana",
+      "name": "Ali Nazik Dana",
+      "description": "Köz patlıcanlı ve yoğurtlu Ali Nazik harcı üzerinde tereyağında kekik ve toz biberle kavrulmuş nefis süt dana bonfile dilimleri.",
+      "price": 400,
+      "category": "kebaplar",
+      "image": "/images/menu/kebap-alinazik-dana.jpg",
+      "ingredients": [
+        "Dana Bonfile Dilimleri",
+        "Sote Kekik ve Toz Biber",
+        "Közlenmiş Patlıcanlı Harç",
+        "Sarımsaklı Süzme Yoğurt",
+        "Kızdırılmış Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "süt"
+      ],
+      "sort_order": 10
+    },
+    {
+      "id": "doner-iskender",
+      "name": "İskender",
+      "description": "Ev yapımı fırınlanmış çıtır tırnak pide parçaları üzerine tereyağlı incecik yaprak et döner dizilir, üzerine domates sosu ve kızdırılmış tereyağı gezdirilir, yanında tava yoğurduyla sunulur.",
+      "price": 395,
+      "category": "donerler",
+      "image": "/images/menu/doner-iskender.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Tırnak Pide Dilimleri",
+        "Sıcak Köpüklü Tereyağı",
+        "Özel Baharatlı Domates Sosu",
+        "Kaymaklı Tava Yoğurdu",
+        "Közlenmiş Biber ve Domates"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 11
+    },
+    {
+      "id": "doner-simsek-iskender",
+      "name": "Şimşek İskender",
+      "description": "Duble yoğun yaprak et dönerli, bol domates soslu ve üzerine dökülen ekstra köpüklü tereyağlı gurme İskender tabağı.",
+      "price": 440,
+      "category": "donerler",
+      "image": "/images/menu/doner-simsek-iskender.jpg",
+      "ingredients": [
+        "Duble Dana Yaprak Döner",
+        "Pide Porsiyon",
+        "Özel İskender Sosu",
+        "Ekstra Kızgın Köpüklü Tereyağı",
+        "Tava Yoğurdu"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 12
+    },
+    {
+      "id": "doner-kebap",
+      "name": "Döner Kebap",
+      "description": "Sade sunumuyla porsiyon Ankara yaprak döneri. Sıcak tırnak pide dilimleri, el yapımı çıtır patates kızartması ve köz biber eşliğinde porsiyon servis.",
+      "price": 360,
+      "category": "donerler",
+      "image": "/images/menu/doner-kebap.jpg",
+      "ingredients": [
+        "Ankara Usulü İnce Yaprak Döner",
+        "El Yapımı Çıtır Patates Kızartması",
+        "Tırnak Pide Dilimleri",
+        "Közlenmiş Biber",
+        "Közlenmiş Domates"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 13
+    },
+    {
+      "id": "doner-durum",
+      "name": "Döner Dürüm",
+      "description": "Usta ellerde açılmış sıcacık taş fırın lavaşı içerisine sarılmış ince kesim yaprak döner. Tercihe göre sumaklı soğanlı veya sade.",
+      "price": 290,
+      "category": "donerler",
+      "image": "/images/menu/doner-durum.jpg",
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Elde Açılmış Sıcak Taş Fırın Lavaşı",
+        "Tercihe Göre Sumaklı Soğan",
+        "Domates Dilimi"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 14
+    },
+    {
+      "id": "doner-durum-beyti-kasar",
+      "name": "Döner Dürüm Beyti Kaşarlı",
+      "description": "Taze fırın lavaşı içerisine et döner ve kaşar peyniri sarılarak fırınlanır, tereyağı gezdirilip dilimlenerek yoğurt, domates sosu ve közlenmiş sebzelerle sunulur.",
+      "price": 340,
+      "category": "donerler",
+      "image": "/images/menu/doner-durum-beyti-kasar.jpg",
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Yağlı Kaşar Peyniri",
+        "Sıcak Tandır Lavaşı",
+        "Tava Yoğurdu",
+        "Köpüklü Tereyağı",
+        "Domates Salçalı Sos"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 15
+    },
+    {
+      "id": "doner-durum-ssk",
+      "name": "Döner Dürüm SSK",
+      "description": "Ankara Aspava kültürünün efsaneleşmiş başyapıtı! Soslu, Soğanlı ve bol Kaşarlı fırınlanmış sıcak döner dürüm lezzet patlaması.",
+      "price": 350,
+      "category": "donerler",
+      "image": "/images/menu/doner-durum-ssk.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Sıcak Tandır Lavaşı",
+        "Rendelenmiş Yağlı Kaşar Peyniri",
+        "Sumaklı Piyaz Soğan",
+        "Özel Salçalı Ankara Aspava Sosu"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 16
+    },
+    {
+      "id": "pide-kiymali",
+      "name": "Kıymalı Pide",
+      "description": "Taş fırında odun ateşinde fırınlanan, taze çekilmiş zırh kıyması, soğan ve ince biber karışımlı geleneksel çıtır pide. Fırından çıktığında tereyağı sürülür.",
+      "price": 260,
+      "category": "pideler",
+      "image": "/images/menu/pide-kiymali.jpg",
+      "ingredients": [
+        "Zırhla Çekilmiş Dana Kıyması",
+        "Kuru Soğan",
+        "Yeşil Köy Biberi",
+        "Domates Rendesi",
+        "Özel Mayalı Çıtır Pide Hamuru",
+        "Fırından Çıkınca Eritilmiş Trabzon Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 17
+    },
+    {
+      "id": "pide-kasarli",
+      "name": "Kaşarlı Pide",
+      "description": "Bol uzayan erimiş lezzetli kaşar peyniri ve üzerine eritilen mis kokulu tereyağlı geleneksel açık pide.",
+      "price": 250,
+      "category": "pideler",
+      "image": "/images/menu/pide-kasarli.jpg",
+      "ingredients": [
+        "Özel Uzayan Yağlı Kaşar Peyniri",
+        "Trabzon Tereyağı",
+        "Çıtır Pide Hamuru"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 18
+    },
+    {
+      "id": "pide-kusbasili",
+      "name": "Kuşbaşılı Pide",
+      "description": "Zar biçiminde ufak ufak kesilmiş kuzu bonfile etleri, tatlı pul biber, domates ve yeşil biber sotesiyle harmanlanıp taş fırında pişen çıtır pide.",
+      "price": 295,
+      "category": "pideler",
+      "image": "/images/menu/pide-kusbasili.jpg",
+      "ingredients": [
+        "Dana Kuşbaşı Eti (Zar kesim)",
+        "Soyulmuş Küp Domates",
+        "Yeşil Biber Sotesi",
+        "Özel Mayalı Çıtır Hamur",
+        "Trabzon Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 19
+    },
+    {
+      "id": "pide-karisik",
+      "name": "Karışık Pide",
+      "description": "Kuşbaşılı et, zırh kıyması harcı, dilimli Afyon sucuğu ve bol kaşarın bir arada fırınlanmasıyla zenginleşen çok malzemeli muazzam pide.",
+      "price": 310,
+      "category": "pideler",
+      "image": "/images/menu/pide-karisik.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Zar Kesim Kuşbaşı Dana Eti",
+        "Zırh Kıyması Harci",
+        "Dilimli Dana Sucuk",
+        "Yağlı Kaşar Peyniri",
+        "Fırından Çıkınca Eritilmiş Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 20
+    },
+    {
+      "id": "pide-kasarli-sucuklu",
+      "name": "Kaşarlı Sucuklu Pide",
+      "description": "Bol dilimli baharatlı dana sucuğunun, eriyen kaşar peyniri ile taş fırında bütünleşerek çıtır çıtır servis edilmesi.",
+      "price": 280,
+      "category": "pideler",
+      "image": "/images/menu/pide-kasarli-sucuklu.jpg",
+      "ingredients": [
+        "Özel Bol Dilimli Dana Sucuk",
+        "Eriyen Kaşar Peyniri",
+        "Pide Hamuru",
+        "Kenar Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 21
+    },
+    {
+      "id": "pide-kiyma-kasarli",
+      "name": "Kıyma Kaşarlı Pide",
+      "description": "Baharatlı zırh kıyması harcının üzerine bol uzayan kaşar peyniri ilavesi yapılan taş fırın pidesi.",
+      "price": 280,
+      "category": "pideler",
+      "image": "/images/menu/pide-kiyma-kasarli.jpg",
+      "ingredients": [
+        "Biberli Kıyma Harcı",
+        "Rendelenmiş Kaşar Peyniri",
+        "Çıtır Taş Fırın Hamuru",
+        "Trabzon Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 22
+    },
+    {
+      "id": "pide-kusbasi-kasarli",
+      "name": "Kuşbaşı Kaşarlı Pide",
+      "description": "Küçük dana kuşbaşı etlerinin kaşarın sıcağında eridikten sonra fırından çıkınca üzerine sürülen tereyağı ile doyumsuz lezzeti.",
+      "price": 310,
+      "category": "pideler",
+      "image": "/images/menu/pide-kusbasi-kasarli.jpg",
+      "ingredients": [
+        "Dana Kuşbaşı Parçaları",
+        "Bol Kaşar Peyniri",
+        "Trabzon Tereyağı",
+        "Pide Hamuru"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 23
+    },
+    {
+      "id": "pide-tavuklu",
+      "name": "Tavuklu Pide",
+      "description": "Domates ve yeşil biberle sote edilen marine edilmiş tavuk göğsü küplerinin, çıtır incecik hamur üzerinde odun fırınında fırınlanıp tereyağlanması.",
+      "price": 260,
+      "category": "pideler",
+      "image": "/images/menu/pide-tavuklu.jpg",
+      "ingredients": [
+        "Sote Tavuk Göğsü",
+        "Yeşil Köy Biberi",
+        "Domates",
+        "Çıtır Pide Hamuru",
+        "Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 24
+    },
+    {
+      "id": "pide-mantarli",
+      "name": "Mantarlı Pide",
+      "description": "Köy biberli güler yüzlü sote kültür mantarlarının, bol kaşar peyniri ile taş fırında buluşması. Çıtır pide kenarlarına fırın sonrası tereyağı sürülür.",
+      "price": 250,
+      "category": "pideler",
+      "image": "/images/menu/pide-mantarli.jpg",
+      "ingredients": [
+        "Taze Kültür Mantarı Sote",
+        "Yeşil Biber",
+        "Rendelenmiş Kaşar Peyniri",
+        "Tereyağı",
+        "Hamur"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 25
+    },
+    {
+      "id": "pide-kapali-donerli",
+      "name": "Kapalı Dönerli Pide",
+      "description": "Geleneksel kapalı Karadeniz tarzında unlu hamura sarılmış, eriyen kaşar peyniri ve incecik dana yaprak döner dolgulu fırınlanmış doyumsuz pide.",
+      "price": 320,
+      "category": "pideler",
+      "image": "/images/menu/pide-kapali-donerli.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Rendelenmiş Kaşar Peyniri",
+        "Kapalı Taş Fırın Hamuru",
+        "Trabzon Tereyağı Sırlaması"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 26
+    },
+    {
+      "id": "kiremit-kofte",
+      "name": "Kiremitte Köfte",
+      "description": "Ev yapımı nefis ızgara anne köftelerinin, toprak güveç kabında özel közlenmiş domates sosu, yeşil biber, eritilmiş kaşar ve üzerine dökülen tereyağı ile fırınlanmasıyla sunulan fokurdayan lezzet.",
+      "price": 310,
+      "category": "kiremitler",
+      "image": "/images/menu/kiremit-kofte.jpg",
+      "ingredients": [
+        "Usta Yapımı Kasap Köftesi",
+        "Bol Kaşar Peyniri",
+        "Sıcak Özel Domates Sosu",
+        "Arpacık Soğan ve Sarımsak",
+        "Yeşil Köy Biberi",
+        "Eritilmiş Tereyağı",
+        "Toprak Güveç Kabı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 27
+    },
+    {
+      "id": "kiremit-tavuk",
+      "name": "Kiremitte Tavuk",
+      "description": "Mantarlı ve bol biberli sote tavuk göğsü lokmalarının toprak güveç kabında özel domates sosu eklenerek kaşar peyniri altında fırında üzeri nar gibi kızartılması.",
+      "price": 280,
+      "category": "kiremitler",
+      "image": "/images/menu/kiremit-tavuk.jpg",
+      "ingredients": [
+        "Sote Tavuk Göğsü",
+        "Dilimlenmiş Kültür Mantarı",
+        "Fırınlanmış Kaşar Peyniri",
+        "Özel Salçalı Güveç Sosu",
+        "Köy Biberi",
+        "Tereyağı"
+      ],
+      "customizable": false,
+      "allergens": [
+        "süt"
+      ],
+      "sort_order": 28
+    },
+    {
+      "id": "kiremit-mantarli-kofte",
+      "name": "Kiremitte Mantarlı Köfte",
+      "description": "Fokurdayan sıcak toprak güveç içinde bol taze kültür mantarı, usta yapımı köfteler ile fırınlanıp üzerine uzayan bol kaşar peyniri ve tereyağı sıvanması.",
+      "price": 335,
+      "category": "kiremitler",
+      "image": "/images/menu/kiremit-mantarli-kofte.jpg",
+      "ingredients": [
+        "Usta Yapımı Kasap Köftesi",
+        "Taze Kültür Mantarı Sote",
+        "Bol Erimiş Kaşar Peyniri",
+        "Trabzon Tereyağı",
+        "Özel Domates Sosu",
+        "Köy Biberi"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 29
+    },
+    {
+      "id": "icecek-kola",
+      "name": "Kola",
+      "description": "Buz gibi serinletici kutu Coca-Cola Original (330ml).",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-kola.jpg",
+      "ingredients": [
+        "Kutu Coca-Cola Orijinal",
+        "İsteğe Bağlı Limon Dilimi ve Kırık Buz"
+      ],
+      "customizable": false,
+      "sort_order": 30
+    },
+    {
+      "id": "icecek-kola-zero",
+      "name": "Zero Kola",
+      "description": "Sıfır şeker ve sıfır kalori kutu Coca-Cola Zero Sugar (330ml).",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-kola-zero.jpg",
+      "ingredients": [
+        "Kutu Coca-Cola Zero Sugar",
+        "İsteğe Bağlı Kırık Buz"
+      ],
+      "customizable": false,
+      "sort_order": 31
+    },
+    {
+      "id": "icecek-fanta",
+      "name": "Fanta",
+      "description": "Buz gibi lezzetli kutu Fanta Portakal gazlı içecek (330ml).",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-fanta.jpg",
+      "ingredients": [
+        "Kutu Fanta Portakal"
+      ],
+      "customizable": false,
+      "sort_order": 32
+    },
+    {
+      "id": "icecek-sprite",
+      "name": "Sprite",
+      "description": "Buz gibi yüksek ferahlatıcı mis kokulu gazlı içecek Sprite (330ml).",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-sprite.jpg",
+      "ingredients": [
+        "Kutu Sprite"
+      ],
+      "customizable": false,
+      "sort_order": 33
+    },
+    {
+      "id": "icecek-ayran",
+      "name": "Ayran",
+      "description": "Katkısız süzme yoğurt, kaya tuzu ve arıtılmış kaynak suyu ile çalkalanan nefis geleneksel yayık köpüklü ayranı.",
+      "price": 40,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-ayran.jpg",
+      "isPopular": true,
+      "ingredients": [
+        "Katkısız Süzme Tava Yoğurdu",
+        "Kaya Tuzu",
+        "Soğutulmuş Kaynak Suyu",
+        "Bol Yayık Köpüğü"
+      ],
+      "customizable": false,
+      "allergens": [
+        "süt"
+      ],
+      "sort_order": 34
+    },
+    {
+      "id": "icecek-fusetea",
+      "name": "Fuse Tea",
+      "description": "Buzlu çay keyfi; Şeftali veya Limon seçeneği taşıyan serin kutu içecek aroması.",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-fusetea.jpg",
+      "ingredients": [
+        "Kutu Fuse Tea (Şeftali veya Limon Seçeneği)"
+      ],
+      "customizable": false,
+      "sort_order": 35
+    },
+    {
+      "id": "icecek-cappy",
+      "name": "Cappy Meyve Suyu",
+      "description": "Doğal meyve püreleriyle zenginleşen kutu Cappy (Meyve Şöleni/Şeftali/Vişne seçeneği ile).",
+      "price": 60,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-cappy.jpg",
+      "ingredients": [
+        "Kutu Cappy Meyve Suyu"
+      ],
+      "customizable": false,
+      "sort_order": 36
+    },
+    {
+      "id": "icecek-sira",
+      "name": "Şıra",
+      "description": "Özellikle yaprak döner ve kebapların yanında içimi muhteşem giden mor üzümden elde edilmiş fermente geleneksel Türk içeceği.",
+      "price": 70,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-sira.jpg",
+      "ingredients": [
+        "Siyah ve Mor Kuru Üzüm Özü",
+        "Soğutulmuş Saf Suyu",
+        "Doğal Fermantasyon Mayası"
+      ],
+      "customizable": false,
+      "sort_order": 37
+    },
+    {
+      "id": "icecek-salgam",
+      "name": "Şalgam",
+      "description": "Doğal mor havuç ve şalgam turpu fermantasyonuyla elde edilen hakiki buz gibi tatlı acısız şalgam suyu.",
+      "price": 50,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-salgam.jpg",
+      "ingredients": [
+        "Çukurova Mor Havucu",
+        "Şalgam Turpu",
+        "Bulgur Unlu Geleneksel Maya",
+        "Kaya Tuzu",
+        "Acısız Tatlı Su"
+      ],
+      "customizable": false,
+      "sort_order": 38
+    },
+    {
+      "id": "icecek-salgam-acili",
+      "name": "Acılı Şalgam",
+      "description": "Doğal fermente edilmiş, üzerine usta yapımı acı süs biberi suyu ilave edilmiş tam acılı geleneksel şalgam suyu.",
+      "price": 50,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-salgam-acili.jpg",
+      "ingredients": [
+        "Mor Havuç",
+        "Acılı Süs Biberi Suyu",
+        "Bulgur Unlu Maya",
+        "Tuz"
+      ],
+      "customizable": false,
+      "sort_order": 39
+    },
+    {
+      "id": "icecek-limonata",
+      "name": "Limonata(hazır)",
+      "description": "Taze sıkılmış limon suları ve taze limon kabuğu esanslarıyla hazırlanan, ferahlatıcı naneli soğuk lezzet.",
+      "price": 65,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-limonata.jpg",
+      "ingredients": [
+        "Sıkılmış Çatalca Limonları",
+        "Limon Kabuğu Kabartması",
+        "Taze Nane Yaprakları",
+        "Şeker Şurubu",
+        "Kırık Buz"
+      ],
+      "customizable": false,
+      "sort_order": 40
+    },
+    {
+      "id": "icecek-soda",
+      "name": "Sade Soda",
+      "description": "Buz gibi soğuk, yüksek mineralli Beypazarı doğal maden suyu (200ml).",
+      "price": 35,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-soda.jpg",
+      "ingredients": [
+        "Beypazarı Doğal Maden Suyu"
+      ],
+      "customizable": false,
+      "sort_order": 41
+    },
+    {
+      "id": "icecek-soda-meyveli",
+      "name": "Meyveli Soda",
+      "description": "Doğal Beypazarı maden suyunun leziz meyve aromalarıyla buluştuğu gazlı içecek (Limon / Çilek / Elma seçenekleriyle).",
+      "price": 40,
+      "category": "icecekler",
+      "image": "/images/menu/icecek-soda-meyveli.jpg",
+      "ingredients": [
+        "Beypazarı Doğal Maden Suyu",
+        "Doğal Meyve Esansları (Tercihe Göre)"
+      ],
+      "customizable": false,
+      "sort_order": 42
+    }
+  ],
+  "settings": {
+    "google_review_url": "https://maps.app.goo.gl/WGZqh9YfZzH9XUPs8",
+    "google_review_delay": "20"
+  }
+}

@@ -1,0 +1,24 @@
+# Render Blueprint — "New → Blueprint" ile bu repoyu seçince hizmeti otomatik kurar.
+# Veriler ve görseller Turso'da (DATABASE_URL/DATABASE_AUTH_TOKEN) tutulur → ücretsiz/kalıcı.
+services:
+  - type: web
+    name: duzce-aspava
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run server
+    healthCheckPath: /api/menu
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: DATABASE_URL          # Turso veritabanı adresi (libsql://...)
+        sync: false
+      - key: DATABASE_AUTH_TOKEN   # Turso erişim anahtarı
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL           # arkadaşının panel e-postası
+        sync: false
+      - key: ADMIN_PASSWORD        # arkadaşının panel şifresi
+        sync: false

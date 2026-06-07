@@ -1,0 +1,28 @@
+# Fly.io config — single machine + persistent volume for the SQLite DB and uploaded images.
+# Set the app name with: fly launch  (or edit "app" below). Secrets (JWT_SECRET, ADMIN_EMAIL,
+# ADMIN_PASSWORD) are set via: fly secrets set KEY=value
+app = "duzce-aspava"
+primary_region = "fra"   # Frankfurt — düşük gecikme için Türkiye'ye yakın
+
+[build]
+
+[env]
+  PORT = "8080"
+  DB_PATH = "/data/app.db"
+  UPLOADS_DIR = "/data/uploads"
+
+# Persistent volume — SQLite file + uploaded images live here (survives deploys/restarts).
+[[mounts]]
+  source = "aspava_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0   # boşta kapanır, istek gelince ~saniyeler içinde açılır (ücretsiz/ucuz)
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

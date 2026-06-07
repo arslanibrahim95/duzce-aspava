@@ -1,0 +1,6 @@
+{
+  "name": "Düzce Aspava",
+  "description": "Düzce Aspava QR menü, anlık sipariş takibi ve dijital cüzdan entegrasyonu sunan modern restoran uygulaması.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

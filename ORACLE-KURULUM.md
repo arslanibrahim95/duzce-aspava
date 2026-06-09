@@ -68,7 +68,7 @@ mkdir -p ~/aspava && tar -xzf ~/aspava.tar.gz -C ~/aspava && cd ~/aspava
 **Sunucuda** `.env` dosyasını oluştur (arkadaşının panel girişini sen belirle):
 ```bash
 cat > .env <<'EOF'
-JWT_SECRET=pVyrmpgdnkI0QtLX5zGZKXzsvPuNkJGML0Iregfmrs
+JWT_SECRET=BURAYA-UZUN-RASTGELE-DEGER  # üret: openssl rand -base64 32
 ADMIN_EMAIL=arkadas@eposta.com
 ADMIN_PASSWORD=guclu-bir-sifre
 SITE_ADDRESS=:80

@@ -1,0 +1,4 @@
+# Shell scripts must use LF so they run on Linux servers (VPS bootstrap).
+*.sh text eol=lf
+Dockerfile text eol=lf
+Caddyfile text eol=lf

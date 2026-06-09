@@ -3,8 +3,13 @@
 // ephemeral disks (e.g. Render free tier).
 import { createClient } from '@libsql/client';
 
+// Priority: DATABASE_URL (Turso/libsql) → DB_PATH (local file on a mounted volume) → dev default.
+const DB_URL =
+  process.env.DATABASE_URL ||
+  (process.env.DB_PATH ? `file:${process.env.DB_PATH}` : 'file:./data/app.db');
+
 export const db = createClient({
-  url: process.env.DATABASE_URL || 'file:./data/app.db',
+  url: DB_URL,
   authToken: process.env.DATABASE_AUTH_TOKEN, // undefined for local file
 });
 

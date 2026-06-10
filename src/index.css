@@ -66,14 +66,54 @@ html.light {
   --color-brand-gold:    var(--c-gold);
 }
 
-html, body, #root {
+/* Page background lives on <html> only: body/#root stay transparent so the
+   fixed ornament layers (body::before/::after, z-index -1) can sit above it. */
+html {
   background-color: var(--c-page);
+}
+html, body, #root {
   color: var(--c-ink);
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
+
+/* ---------- Page atmosphere ----------
+   Two fixed, non-interactive layers behind all content:
+   ::before — köz (ember) warmth breathing from the top + a faint gold corner.
+   ::after  — engraved grapevine line-art echoing the printed menu card
+              (assets/fiziksel-menu-sayfa*.jpg), as a data-URI SVG. */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Sabit rgba (color-mix değil): eski WebView'larda tam-opak fallback riskine düşmesin */
+body::before {
+  background:
+    radial-gradient(110% 55% at 50% -12%, rgba(224, 83, 31, 0.07), transparent 70%),
+    radial-gradient(70% 45% at -8% 108%, rgba(229, 169, 60, 0.05), transparent 72%);
+}
+html.light body::before {
+  background:
+    radial-gradient(110% 55% at 50% -12%, rgba(210, 74, 24, 0.05), transparent 70%),
+    radial-gradient(70% 45% at -8% 108%, rgba(181, 131, 42, 0.06), transparent 72%);
+}
+body::after {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='640' viewBox='0 0 420 640' fill='none' stroke='%23C08A3E' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M398 -10C352 96 396 176 332 258 284 322 332 414 272 498 246 534 256 588 236 644'/%3E%3Cpath d='M368 130c-34 6-50 28-44 46 5 14 24 12 26-2 2-11-10-16-16-8'/%3E%3Cpath d='M338 240C296 214 250 216 214 246c34 28 86 24 124-6Z'/%3E%3Cpath d='M334 241c-34 3-70 7-110 6'/%3E%3Cpath d='M322 318c30-18 66-16 90 8-26 22-64 18-90-8Z'/%3E%3Cpath d='M326 320c28 6 56 8 80 6'/%3E%3Cpath d='M306 412c-6 14-10 24-12 34'/%3E%3Ccircle cx='258' cy='458' r='11'/%3E%3Ccircle cx='282' cy='458' r='11'/%3E%3Ccircle cx='306' cy='458' r='11'/%3E%3Ccircle cx='330' cy='458' r='11'/%3E%3Ccircle cx='270' cy='480' r='11'/%3E%3Ccircle cx='294' cy='480' r='11'/%3E%3Ccircle cx='318' cy='480' r='11'/%3E%3Ccircle cx='282' cy='502' r='11'/%3E%3Ccircle cx='306' cy='502' r='11'/%3E%3Ccircle cx='294' cy='524' r='11'/%3E%3Cpath d='M300 444c22-12 48-10 66 8-20 16-48 12-66-8Z'/%3E%3Cpath d='M250 556c30 8 42 28 34 44-6 12-24 8-24-4 0-10 11-13 16-6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='640' viewBox='0 0 420 640' fill='none' stroke='%23C08A3E' stroke-width='2.5' stroke-linecap='round'%3E%3Cg transform='rotate(180 210 320)'%3E%3Cpath d='M398 -10C352 96 396 176 332 258 284 322 332 414 272 498 246 534 256 588 236 644'/%3E%3Cpath d='M368 130c-34 6-50 28-44 46 5 14 24 12 26-2 2-11-10-16-16-8'/%3E%3Cpath d='M338 240C296 214 250 216 214 246c34 28 86 24 124-6Z'/%3E%3Cpath d='M334 241c-34 3-70 7-110 6'/%3E%3Cpath d='M322 318c30-18 66-16 90 8-26 22-64 18-90-8Z'/%3E%3Cpath d='M326 320c28 6 56 8 80 6'/%3E%3Cpath d='M306 412c-6 14-10 24-12 34'/%3E%3Ccircle cx='258' cy='458' r='11'/%3E%3Ccircle cx='282' cy='458' r='11'/%3E%3Ccircle cx='306' cy='458' r='11'/%3E%3Ccircle cx='330' cy='458' r='11'/%3E%3Ccircle cx='270' cy='480' r='11'/%3E%3Ccircle cx='294' cy='480' r='11'/%3E%3Ccircle cx='318' cy='480' r='11'/%3E%3Ccircle cx='282' cy='502' r='11'/%3E%3Ccircle cx='306' cy='502' r='11'/%3E%3Ccircle cx='294' cy='524' r='11'/%3E%3Cpath d='M300 444c22-12 48-10 66 8-20 16-48 12-66-8Z'/%3E%3Cpath d='M250 556c30 8 42 28 34 44-6 12-24 8-24-4 0-10 11-13 16-6'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-position: top -36px right -64px, bottom -36px left -64px;
+  background-size: min(56vw, 380px) auto, min(56vw, 380px) auto;
+  opacity: 0.055;
+  transition: opacity 0.35s ease;
+}
+html.light body::after { opacity: 0.075; }
 
 /* Display serif niceties */
 .font-display {

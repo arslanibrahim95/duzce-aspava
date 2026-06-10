@@ -137,7 +137,8 @@ export default function App() {
   const allergenHiddenCount = searchAndCategory.length - filteredMenuItems.length;
 
   return (
-    <div className="min-h-screen bg-page text-ink overflow-x-hidden">
+    // Zemin html'de; bg-page burada olursa body::before/::after süslemesini örter
+    <div className="min-h-screen text-ink overflow-x-hidden">
       {/* Top ribbon */}
       <div className="bg-brand text-on-brand py-2 px-4 text-center text-[12.5px] font-medium">
         📢 Tüm ana yemeklerin yanında <span className="font-bold">5 farklı Ankara usulü ikram</span> sınırsız ve ücretsizdir

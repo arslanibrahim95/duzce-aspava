@@ -48,11 +48,13 @@ export function currentPart(date = new Date()) {
   return 'gece';
 }
 export async function recordView(itemId) {
-  if (!itemId) return;
+  if (!itemId || typeof itemId !== 'string') return;
+  // SELECT'li INSERT: sadece menüde gerçekten var olan ürünler sayılır (uydurma ID ile tablo şişirilemez).
   await db.execute({
-    sql: `INSERT INTO item_views (item_id, part, count) VALUES (?, ?, 1)
+    sql: `INSERT INTO item_views (item_id, part, count)
+          SELECT id, ?, 1 FROM menu_items WHERE id = ?
           ON CONFLICT(item_id, part) DO UPDATE SET count = count + 1`,
-    args: [itemId, currentPart()],
+    args: [currentPart(), itemId],
   });
 }
 

@@ -18,10 +18,37 @@ import { seedIfEmpty } from './seed-runtime.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const PORT = process.env.PORT || 8787;
+const PROD = process.env.NODE_ENV === 'production';
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-insecure-secret-change-me';
+if (PROD && !process.env.JWT_SECRET) {
+  console.error('HATA: JWT_SECRET tanımlı değil. Production güvensiz varsayılanla başlatılmaz — .env dosyasına güçlü bir JWT_SECRET ekleyin.');
+  process.exit(1);
+}
 
 const app = express();
+app.set('trust proxy', 1); // Caddy/Render reverse proxy arkasında gerçek istemci IP'si için
 app.use(express.json({ limit: '2mb' }));
+
+// Brute-force koruması: IP başına 10 dakikada en fazla 5 başarısız giriş denemesi.
+const LOGIN_WINDOW_MS = 10 * 60 * 1000;
+const LOGIN_MAX_FAILS = 5;
+const loginFails = new Map(); // ip -> { count, resetAt }
+function loginLimiter(req, res, next) {
+  const now = Date.now();
+  if (loginFails.size > 1000) for (const [ip, r] of loginFails) if (now > r.resetAt) loginFails.delete(ip);
+  const rec = loginFails.get(req.ip);
+  if (rec && now > rec.resetAt) { loginFails.delete(req.ip); return next(); }
+  if (rec && rec.count >= LOGIN_MAX_FAILS) {
+    return res.status(429).json({ error: 'Çok fazla hatalı deneme. Lütfen 10 dakika sonra tekrar deneyin.' });
+  }
+  next();
+}
+function recordLoginFail(ip) {
+  const now = Date.now();
+  const rec = loginFails.get(ip);
+  if (!rec || now > rec.resetAt) loginFails.set(ip, { count: 1, resetAt: now + LOGIN_WINDOW_MS });
+  else rec.count += 1;
+}
 
 function requireAuth(req, res, next) {
   const h = req.headers.authorization || '';
@@ -32,10 +59,27 @@ function requireAuth(req, res, next) {
 }
 const wrap = (fn) => (req, res) => fn(req, res).catch((e) => { console.error(e); res.status(500).json({ error: 'Sunucu hatası' }); });
 
+// /api/track herkese açık: IP başına dakikada 30 kayıtla sınırla (sıralama manipülasyonu / DB şişirme önlemi).
+// Limit aşımında sessizce 200 dönülür — saldırgana sinyal verme, istemciyi basit tut.
+const TRACK_WINDOW_MS = 60 * 1000;
+const TRACK_MAX = 30;
+const trackHits = new Map(); // ip -> { count, resetAt }
+function allowTrack(ip) {
+  const now = Date.now();
+  if (trackHits.size > 5000) for (const [k, r] of trackHits) if (now > r.resetAt) trackHits.delete(k);
+  const rec = trackHits.get(ip);
+  if (!rec || now > rec.resetAt) { trackHits.set(ip, { count: 1, resetAt: now + TRACK_WINDOW_MS }); return true; }
+  rec.count += 1;
+  return rec.count <= TRACK_MAX;
+}
+
 // ---- Public reads ----
 app.get('/api/menu', wrap(async (req, res) => res.json(await getMenu())));
 app.get('/api/settings', wrap(async (req, res) => res.json(await getSettings())));
-app.post('/api/track', wrap(async (req, res) => { try { await recordView(req.body?.id); } catch { /* ignore */ } res.json({ ok: true }); }));
+app.post('/api/track', wrap(async (req, res) => {
+  if (allowTrack(req.ip)) { try { await recordView(req.body?.id); } catch { /* ignore */ } }
+  res.json({ ok: true });
+}));
 
 // ---- Images (served from DB) ----
 app.get('/img/:id', wrap(async (req, res) => {
@@ -46,12 +90,14 @@ app.get('/img/:id', wrap(async (req, res) => {
 }));
 
 // ---- Login ----
-app.post('/api/login', wrap(async (req, res) => {
+app.post('/api/login', loginLimiter, wrap(async (req, res) => {
   const { email, password } = req.body || {};
   const user = await getAdminByEmail(email || '');
-  if (!user || !bcrypt.compareSync(String(password || ''), user.password_hash)) {
+  if (!user || !(await bcrypt.compare(String(password || ''), user.password_hash))) {
+    recordLoginFail(req.ip);
     return res.status(401).json({ error: 'E-posta veya şifre hatalı' });
   }
+  loginFails.delete(req.ip);
   const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '30d' });
   res.json({ token, email: user.email });
 }));
@@ -98,6 +144,9 @@ if (existsSync(DIST)) {
 
 (async () => {
   await init();
-  try { await seedIfEmpty(); } catch (e) { console.error('Seed hatası:', e); }
+  try { await seedIfEmpty(); } catch (e) {
+    console.error('Seed hatası:', e);
+    if (PROD) process.exit(1); // prod'da yarım/güvensiz seed ile yayına çıkma
+  }
   app.listen(PORT, () => console.log(`Aspava backend → http://localhost:${PORT}`));
 })();

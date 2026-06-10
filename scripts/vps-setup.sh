@@ -60,6 +60,13 @@ fi
 echo "==> Uygulama derlenip başlatılıyor (ilk sefer birkaç dakika sürebilir)"
 docker compose up -d --build
 
+# 6) Gece yedeği (her gün 03:30 → /opt/aspava/backups, son 14 kopya)
+echo "==> Otomatik gece yedeği kuruluyor (03:30)"
+cat > /etc/cron.d/aspava-backup <<EOF
+30 3 * * * root bash $APP_DIR/scripts/backup.sh >> /var/log/aspava-backup.log 2>&1
+EOF
+chmod 644 /etc/cron.d/aspava-backup
+
 SITE="$(grep -E '^SITE_ADDRESS=' .env | cut -d= -f2-)"
 echo ""
 echo "============================================================"

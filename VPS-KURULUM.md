@@ -52,6 +52,28 @@ Gerisini kendi halleder (Docker kurar, derler, HTTPS sertifikası alır, menüy�
 
 ---
 
+## Yedekleme & geri yükleme
+
+Kurulum scripti **her gece 03:30'da otomatik yedek** alır: menü, fiyatlar, görseller ve panel
+hesabı `/opt/aspava/backups/` altına kopyalanır (son 14 gün tutulur). Senin yapman gereken bir şey yok.
+
+- **Elle yedek almak için** (örn. büyük değişiklik öncesi):
+  ```bash
+  bash /opt/aspava/scripts/backup.sh
+  ```
+- **Yedeği kendi bilgisayarına indirmek için** (ayda bir önerilir) — kendi bilgisayarında:
+  ```bash
+  scp root@SUNUCU_IP:/opt/aspava/backups/app-*.db .
+  ```
+- **Geri yükleme** (sunucu Console'unda; TARIH kısmını `ls /opt/aspava/backups` ile seç):
+  ```bash
+  cd /opt/aspava
+  docker compose cp backups/app-TARIH.db app:/data/app.db
+  docker compose restart app
+  ```
+- **Ekstra güvence (önerilir):** Hetzner panelinde sunucunun **Backups** özelliğini aç
+  (aylık ~1€, sunucunun tamamının kopyası). Disk bozulsa bile her şey geri gelir.
+
 ## Sık işler
 - **Menüde değişiklik:** Yönetim panelinden yap (anında yansır). Sunucuya dokunmana gerek yok.
 - **Koddan güncelleme geldiğinde:** Console'da:

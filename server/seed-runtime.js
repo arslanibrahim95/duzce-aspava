@@ -31,6 +31,9 @@ export async function seedIfEmpty() {
   for (const [k, v] of Object.entries(data.settings || {})) await setSetting(k, v);
 
   const email = process.env.ADMIN_EMAIL || 'admin@aspava.local';
+  if (process.env.NODE_ENV === 'production' && !process.env.ADMIN_PASSWORD) {
+    throw new Error('ADMIN_PASSWORD tanımlı değil — production seed varsayılan şifreyle yapılmaz. .env dosyasına ADMIN_PASSWORD ekleyin.');
+  }
   const password = process.env.ADMIN_PASSWORD || 'aspava1234';
   await upsertAdmin(email, bcrypt.hashSync(password, 10));
   console.log(`Auto-seed tamam: ${data.items.length} ürün, admin: ${email}`);

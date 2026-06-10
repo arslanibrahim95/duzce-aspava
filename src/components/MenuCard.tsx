@@ -63,7 +63,7 @@ export default function MenuCard({ item }: MenuCardProps) {
       >
         {/* Image */}
         <div className="relative h-52 w-full overflow-hidden bg-card-2">
-          {!imageError ? (
+          {item.image && !imageError ? (
             <>
               {!isImageLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -171,7 +171,7 @@ export default function MenuCard({ item }: MenuCardProps) {
             >
               {/* Hero image */}
               <div className="relative h-44 sm:h-52 shrink-0 bg-card-2">
-                {!imageError ? (
+                {item.image && !imageError ? (
                   <>
                     {!isModalImageLoaded && <div className="absolute inset-0 shimmer-bg opacity-60" />}
                     <img

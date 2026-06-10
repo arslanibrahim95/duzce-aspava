@@ -273,6 +273,107 @@
       "sort_order": 10
     },
     {
+      "id": "kebap-mantarli-sis",
+      "name": "Mantarlı Şiş Kebap",
+      "description": "Közlenmiş taze mantarlarla harmanlanan kuzu eti; dumanı üstünde özel garnitürlerle.",
+      "price": 830,
+      "category": "kebaplar",
+      "image": "",
+      "ingredients": [
+        "Marine Kuzu Eti Küpleri",
+        "Közlenmiş Kültür Mantarı",
+        "Tırnak Pide",
+        "Köz Biber ve Domates",
+        "Sumaklı Soğan Piyazı"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 11
+    },
+    {
+      "id": "kebap-domatesli",
+      "name": "Domatesli Kebap",
+      "description": "Sulu yaz domatesleri ve satır kıymasının şişteki eşsiz uyumu; her lokmada ferahlık.",
+      "price": 740,
+      "category": "kebaplar",
+      "image": "",
+      "ingredients": [
+        "Zırh Kıyması",
+        "Sulu Yaz Domatesleri",
+        "Tırnak Pide",
+        "Közlenmiş Biber",
+        "Maydanozlu Piyaz"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 12
+    },
+    {
+      "id": "kebap-izgara-kofte",
+      "name": "Izgara Köfte",
+      "description": "Usta yapımı kasap köftesi mangalda nar gibi; süzme yoğurt ve köz sebzeyle.",
+      "price": 690,
+      "category": "kebaplar",
+      "image": "",
+      "ingredients": [
+        "Usta Yapımı Kasap Köftesi",
+        "Tırnak Pide",
+        "Süzme Yoğurt",
+        "Köz Biber ve Domates",
+        "Sumaklı Soğan"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 13
+    },
+    {
+      "id": "kebap-yogurtlu",
+      "name": "Yoğurtlu Kebap",
+      "description": "Kıtır pide yatağında kebap etleri; halis tereyağı ve süzme yoğurdun enfes uyumu.",
+      "price": 730,
+      "category": "kebaplar",
+      "image": "",
+      "ingredients": [
+        "Zırh Kebap Kıyması",
+        "Kıtır Tırnak Pide",
+        "Süzme Tava Yoğurdu",
+        "Köpüklü Tereyağı",
+        "Özel Domates Sosu"
+      ],
+      "customizable": false,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 14
+    },
+    {
+      "id": "kebap-tavuk-pirzola",
+      "name": "Tavuk Pırzola",
+      "description": "Kemiksiz tavuk butun ızgarada nar gibi kızarmış, yumuşacık ve doyurucu hali.",
+      "price": 650,
+      "category": "kebaplar",
+      "image": "",
+      "ingredients": [
+        "Kemiksiz Tavuk But",
+        "Özel Marinasyon",
+        "Tırnak Pide",
+        "Közlenmiş Biber ve Domates"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten"
+      ],
+      "sort_order": 15
+    },
+    {
       "id": "doner-iskender",
       "name": "İskender",
       "description": "Sıcak pide üzerinde yaprak döner, kızgın tereyağı, kıvamlı yoğurt ve domates sosu.",
@@ -293,7 +394,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 11
+      "sort_order": 16
     },
     {
       "id": "doner-simsek-iskender",
@@ -314,7 +415,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 12
+      "sort_order": 17
     },
     {
       "id": "doner-kebap",
@@ -334,7 +435,7 @@
       "allergens": [
         "glüten"
       ],
-      "sort_order": 13
+      "sort_order": 18
     },
     {
       "id": "doner-durum",
@@ -353,7 +454,28 @@
       "allergens": [
         "glüten"
       ],
-      "sort_order": 14
+      "sort_order": 19
+    },
+    {
+      "id": "doner-durum-beyti",
+      "name": "Döner Dürüm Beyti",
+      "description": "Beyti usulü sarılan döner; dilimlenip özel domates sosu ve eritilmiş tereyağıyla.",
+      "price": 720,
+      "category": "donerler",
+      "image": "",
+      "ingredients": [
+        "Dana Yaprak Döner",
+        "Sıcak Tandır Lavaşı",
+        "Tava Yoğurdu",
+        "Köpüklü Tereyağı",
+        "Domates Salçalı Sos"
+      ],
+      "customizable": true,
+      "allergens": [
+        "glüten",
+        "süt"
+      ],
+      "sort_order": 20
     },
     {
       "id": "doner-durum-beyti-kasar",
@@ -375,7 +497,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 15
+      "sort_order": 21
     },
     {
       "id": "doner-durum-ssk",
@@ -397,7 +519,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 16
+      "sort_order": 22
     },
     {
       "id": "pide-kiymali",
@@ -418,7 +540,7 @@
       "allergens": [
         "glüten"
       ],
-      "sort_order": 17
+      "sort_order": 23
     },
     {
       "id": "pide-kasarli",
@@ -437,7 +559,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 18
+      "sort_order": 24
     },
     {
       "id": "pide-kusbasili",
@@ -457,7 +579,7 @@
       "allergens": [
         "glüten"
       ],
-      "sort_order": 19
+      "sort_order": 25
     },
     {
       "id": "pide-karisik",
@@ -479,7 +601,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 20
+      "sort_order": 26
     },
     {
       "id": "pide-kasarli-sucuklu",
@@ -499,7 +621,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 21
+      "sort_order": 27
     },
     {
       "id": "pide-kiyma-kasarli",
@@ -519,7 +641,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 22
+      "sort_order": 28
     },
     {
       "id": "pide-kusbasi-kasarli",
@@ -539,7 +661,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 23
+      "sort_order": 29
     },
     {
       "id": "pide-tavuklu",
@@ -559,7 +681,7 @@
       "allergens": [
         "glüten"
       ],
-      "sort_order": 24
+      "sort_order": 30
     },
     {
       "id": "pide-mantarli",
@@ -580,7 +702,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 25
+      "sort_order": 31
     },
     {
       "id": "pide-kapali-donerli",
@@ -601,7 +723,24 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 26
+      "sort_order": 32
+    },
+    {
+      "id": "kiremit-sis",
+      "name": "Kiremitte Şiş",
+      "description": "Mangalda ön pişirimi yapılan lokum etler; kiremit kapta özel sos ve sebzelerle fırınlanır.",
+      "price": 850,
+      "category": "kiremitler",
+      "image": "",
+      "ingredients": [
+        "Lokum Kuzu Şiş Etleri",
+        "Özel Güveç Sosu",
+        "Mevsim Sebzeleri",
+        "Toprak Kiremit Kap"
+      ],
+      "customizable": false,
+      "allergens": [],
+      "sort_order": 33
     },
     {
       "id": "kiremit-kofte",
@@ -624,7 +763,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 27
+      "sort_order": 34
     },
     {
       "id": "kiremit-tavuk",
@@ -645,7 +784,7 @@
       "allergens": [
         "süt"
       ],
-      "sort_order": 28
+      "sort_order": 35
     },
     {
       "id": "kiremit-mantarli-kofte",
@@ -667,7 +806,7 @@
         "glüten",
         "süt"
       ],
-      "sort_order": 29
+      "sort_order": 36
     },
     {
       "id": "icecek-kola",
@@ -681,7 +820,7 @@
         "İsteğe Bağlı Limon Dilimi ve Kırık Buz"
       ],
       "customizable": false,
-      "sort_order": 30
+      "sort_order": 37
     },
     {
       "id": "icecek-kola-zero",
@@ -695,7 +834,7 @@
         "İsteğe Bağlı Kırık Buz"
       ],
       "customizable": false,
-      "sort_order": 31
+      "sort_order": 38
     },
     {
       "id": "icecek-fanta",
@@ -708,7 +847,7 @@
         "Kutu Fanta Portakal"
       ],
       "customizable": false,
-      "sort_order": 32
+      "sort_order": 39
     },
     {
       "id": "icecek-sprite",
@@ -721,7 +860,7 @@
         "Kutu Sprite"
       ],
       "customizable": false,
-      "sort_order": 33
+      "sort_order": 40
     },
     {
       "id": "icecek-uzay-kola",
@@ -734,7 +873,7 @@
         "Uzay Kola"
       ],
       "customizable": false,
-      "sort_order": 34
+      "sort_order": 41
     },
     {
       "id": "icecek-uzay-gazoz",
@@ -747,7 +886,7 @@
         "Uzay Gazoz"
       ],
       "customizable": false,
-      "sort_order": 35
+      "sort_order": 42
     },
     {
       "id": "icecek-uzay-portakal",
@@ -760,7 +899,7 @@
         "Uzay Portakal"
       ],
       "customizable": false,
-      "sort_order": 36
+      "sort_order": 43
     },
     {
       "id": "icecek-ayran",
@@ -780,7 +919,7 @@
       "allergens": [
         "süt"
       ],
-      "sort_order": 37
+      "sort_order": 44
     },
     {
       "id": "icecek-fusetea",
@@ -793,7 +932,7 @@
         "Kutu Fuse Tea (Şeftali veya Limon Seçeneği)"
       ],
       "customizable": false,
-      "sort_order": 38
+      "sort_order": 45
     },
     {
       "id": "icecek-cappy",
@@ -806,7 +945,21 @@
         "Kutu Cappy Meyve Suyu"
       ],
       "customizable": false,
-      "sort_order": 39
+      "sort_order": 46
+    },
+    {
+      "id": "icecek-su",
+      "name": "Su",
+      "description": "Soğuk pet şişe doğal kaynak suyu (500ml).",
+      "price": 20,
+      "category": "icecekler",
+      "image": "",
+      "ingredients": [
+        "Doğal Kaynak Suyu (Pet Şişe 500ml)"
+      ],
+      "customizable": false,
+      "allergens": [],
+      "sort_order": 47
     },
     {
       "id": "icecek-sira",
@@ -821,7 +974,7 @@
         "Doğal Fermantasyon Mayası"
       ],
       "customizable": false,
-      "sort_order": 40
+      "sort_order": 48
     },
     {
       "id": "icecek-salgam",
@@ -838,7 +991,7 @@
         "Acısız Tatlı Su"
       ],
       "customizable": false,
-      "sort_order": 41
+      "sort_order": 49
     },
     {
       "id": "icecek-salgam-acili",
@@ -854,7 +1007,7 @@
         "Tuz"
       ],
       "customizable": false,
-      "sort_order": 42
+      "sort_order": 50
     },
     {
       "id": "icecek-limonata",
@@ -871,7 +1024,7 @@
         "Kırık Buz"
       ],
       "customizable": false,
-      "sort_order": 43
+      "sort_order": 51
     },
     {
       "id": "icecek-soda",
@@ -884,7 +1037,7 @@
         "Beypazarı Doğal Maden Suyu"
       ],
       "customizable": false,
-      "sort_order": 44
+      "sort_order": 52
     },
     {
       "id": "icecek-soda-meyveli",
@@ -898,7 +1051,7 @@
         "Doğal Meyve Esansları (Tercihe Göre)"
       ],
       "customizable": false,
-      "sort_order": 45
+      "sort_order": 53
     }
   ],
   "settings": {

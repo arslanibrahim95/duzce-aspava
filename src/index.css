@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Inter:wght@300..800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Inter:wght@300..800&family=JetBrains+Mono:wght@500;600;700&family=Pinyon+Script&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
@@ -8,36 +8,36 @@
    ============================================================ */
 
 :root {
-  /* Warm charcoal surfaces (default / dark) */
-  --c-page:      #17120F;
-  --c-card:      #221A15;
-  --c-card-2:    #2C211B;
-  --c-line:      #3A2D24;
-  --c-ink:       #F7EFE8;
-  --c-ink-soft:  #C9B8AC;
-  --c-ink-faint: #8A7A6E;
+  /* Bordo / wine surfaces (default / dark) — Instagram marka kimliği */
+  --c-page:      #1C0D11; /* deep bordo-black */
+  --c-card:      #34161F; /* wine */
+  --c-card-2:    #401C29; /* wine, raised */
+  --c-line:      #502634; /* wine border */
+  --c-ink:       #F5EAE0; /* warm cream */
+  --c-ink-soft:  #D8BBB1; /* rosy cream */
+  --c-ink-faint: #A1827B; /* muted mauve */
 
   /* Brand accents */
-  --c-brand:     #E0531F; /* Ember */
-  --c-brand-2:   #C2451A; /* Ember hover */
-  --c-gold:      #E5A93C; /* Warm gold */
-  --c-on-brand:  #1A120D; /* Text on ember fills */
+  --c-brand:     #B23A52; /* Wine red — CTA */
+  --c-brand-2:   #9A2F45; /* Wine red hover */
+  --c-gold:      #D7A94E; /* Logo gold — hero accent / prices */
+  --c-on-brand:  #FFF5EE; /* Cream text on wine fills */
 }
 
 html.light {
-  /* Warm cream surfaces (daylight) */
-  --c-page:      #F7F1E9;
-  --c-card:      #FFFFFF;
-  --c-card-2:    #F3EBE1;
-  --c-line:      #E7DCCD;
-  --c-ink:       #2A211B;
-  --c-ink-soft:  #5C4F45;
-  --c-ink-faint: #8B7D70;
+  /* Cream surfaces (daylight) — bordo marka */
+  --c-page:      #F6EEE3;
+  --c-card:      #FFFBF7; /* warm white (saf beyaz değil) */
+  --c-card-2:    #F1E7DA;
+  --c-line:      #E6D9C8;
+  --c-ink:       #2A1118; /* wine-tinted ink */
+  --c-ink-soft:  #5E3A42;
+  --c-ink-faint: #927078;
 
-  --c-brand:     #D24A18;
-  --c-brand-2:   #B23F14;
-  --c-gold:      #B5832A;
-  --c-on-brand:  #FFFFFF;
+  --c-brand:     #8E2741; /* Bordo */
+  --c-brand-2:   #761F35; /* Bordo, koyu */
+  --c-gold:      #A8792A; /* Gold (gündüz) */
+  --c-on-brand:  #FFF5EE;
 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' stroke='%23B5832A' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Ccircle cx='0' cy='0' r='20' stroke='%23B5832A' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Ccircle cx='40' cy='0' r='20' stroke='%23B5832A' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Ccircle cx='0' cy='40' r='20' stroke='%23B5832A' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3Ccircle cx='40' cy='40' r='20' stroke='%23B5832A' stroke-width='0.5' fill='none' opacity='0.05'/%3E%3C/svg%3E");
 }
@@ -47,6 +47,7 @@ html.light {
 @theme inline {
   --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-script:  "Pinyon Script", "Snell Roundhand", cursive;
   --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-page:       var(--c-page);
@@ -99,13 +100,13 @@ body::after {
 /* Sabit rgba (color-mix değil): eski WebView'larda tam-opak fallback riskine düşmesin */
 body::before {
   background:
-    radial-gradient(110% 55% at 50% -12%, rgba(224, 83, 31, 0.07), transparent 70%),
-    radial-gradient(70% 45% at -8% 108%, rgba(229, 169, 60, 0.05), transparent 72%);
+    radial-gradient(110% 55% at 50% -12%, rgba(150, 33, 56, 0.16), transparent 70%),
+    radial-gradient(70% 45% at -8% 108%, rgba(215, 169, 78, 0.05), transparent 72%);
 }
 html.light body::before {
   background:
-    radial-gradient(110% 55% at 50% -12%, rgba(210, 74, 24, 0.05), transparent 70%),
-    radial-gradient(70% 45% at -8% 108%, rgba(181, 131, 42, 0.06), transparent 72%);
+    radial-gradient(110% 55% at 50% -12%, rgba(142, 39, 65, 0.06), transparent 70%),
+    radial-gradient(70% 45% at -8% 108%, rgba(168, 121, 42, 0.06), transparent 72%);
 }
 body::after {
   background-image:

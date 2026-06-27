@@ -184,16 +184,17 @@ export default function App() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-7">
         {/* Header */}
         <header className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-brand text-on-brand rounded-2xl flex items-center justify-center font-display font-bold text-2xl shadow-lg shrink-0">
-              A
-            </div>
+          <div className="flex items-center gap-3 sm:gap-3.5">
+            <img
+              src="/logo.jpg"
+              alt="Düzce Aspava"
+              width="68"
+              height="68"
+              className="w-14 h-14 sm:w-[68px] sm:h-[68px] rounded-2xl ring-1 ring-gold/40 shadow-lg shrink-0 object-cover"
+            />
             <div>
-              <h1 className="text-2xl sm:text-3xl font-display font-bold tracking-tight leading-none flex items-baseline gap-2">
-                ASPAVA
-                <span className="text-base font-display italic font-semibold text-gold">Düzce</span>
-              </h1>
-              <p className="text-[13px] text-ink-faint mt-1.5">Seçkin Meze &amp; Enfes Kebap · Ankara Usulü</p>
+              <h1 className="font-script text-gold text-[26px] sm:text-3xl leading-[1.05] whitespace-nowrap">Düzce Aspava</h1>
+              <p className="text-[12.5px] sm:text-[13px] text-ink-faint mt-0.5">Seçkin Meze &amp; Enfes Kebap · Ankara Usulü</p>
             </div>
           </div>
 

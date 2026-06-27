@@ -41,14 +41,26 @@ git push -u origin main
    - `ADMIN_PASSWORD` = arkadaşının panel şifresi
 4. **Apply** → Render kurar ve yayınlar (~birkaç dk). Çıkan adres: `https://duzce-aspava.onrender.com`.
 
-İlk açılışta sunucu Turso'yu otomatik doldurur (43 ürün + görseller + yönetici). Adres hazır → **QR** üret.
+İlk açılışta sunucu Turso'yu otomatik doldurur (54 ürün + görseller + yönetici). Adres hazır → **QR** üret.
+
+---
+
+## Aşama 4 — Uyanık tutma (pinger) · kartsız · ÖNEMLİ
+Render ücretsiz katmanı ~15 dk hareketsizlikte uykuya geçer; uyandığında ilk müşteri QR'ı okutunca
+~30-60 sn boş ekran bekler. Bunu **ücretsiz bir ziyaretçi** ile tamamen önlüyoruz:
+
+1. https://cron-job.org → ücretsiz **Sign up** (kart yok).
+2. **Create cronjob** →
+   - **Title:** `aspava-uyanik`
+   - **URL:** `https://duzce-aspava.onrender.com/api/menu` (kendi adresinle)
+   - **Schedule:** her **10 dakikada bir** (`Every 10 minutes`)
+3. **Save.** Artık sunucu hep uyanık kalır → müşteri QR'ı okutunca menü anında açılır.
+
+> Ücretsiz katman ayda 750 saat verir (7/24 = 720 saat) — tek servis için yeterli.
 
 ---
 
 ## Notlar
-- **Render ücretsiz katmanı**, ~15 dk hareketsizlikte uykuya geçer; sonraki ilk istekte ~30-60 sn
-  "uyanma" gecikmesi olur. Bir QR menü için kabul edilebilir. (İstersen sürekli açık tutmanın ücretli
-  yolu da var.)
 - **Güncelleme:** kodda değişiklik → `git push` → Render otomatik yeniden yayınlar.
 - **Veri/görseller Turso'da kalıcı** — Render yeniden başlasa da kaybolmaz.
 - Panel: yayınlı adres → footer'daki **Yönetim** → ADMIN_EMAIL/ADMIN_PASSWORD ile giriş.

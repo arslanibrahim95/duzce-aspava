@@ -12,6 +12,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20"
+      - key: NODE_ENV           # production: güvenlik fail-fast'leri (JWT/ADMIN_PASSWORD) + HSTS aktif
+        value: production
       - key: DATABASE_URL          # Turso veritabanı adresi (libsql://...)
         sync: false
       - key: DATABASE_AUTH_TOKEN   # Turso erişim anahtarı

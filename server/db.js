@@ -20,11 +20,22 @@ export async function init() {
     id TEXT PRIMARY KEY, name TEXT NOT NULL, description TEXT DEFAULT '', price INTEGER DEFAULT 0,
     category TEXT DEFAULT '', image TEXT DEFAULT '', is_popular INTEGER DEFAULT 0, is_spicy INTEGER DEFAULT 0,
     is_vegetarian INTEGER DEFAULT 0, customizable INTEGER DEFAULT 0, ingredients TEXT DEFAULT '[]',
-    allergens TEXT DEFAULT '[]', sort_order INTEGER DEFAULT 0)`);
+    allergens TEXT DEFAULT '[]', sort_order INTEGER DEFAULT 0, calories INTEGER DEFAULT 0)`);
   await db.execute(`CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT)`);
   await db.execute(`CREATE TABLE IF NOT EXISTS admin_users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL)`);
   await db.execute(`CREATE TABLE IF NOT EXISTS item_views (item_id TEXT NOT NULL, part TEXT NOT NULL, count INTEGER DEFAULT 0, PRIMARY KEY (item_id, part))`);
   await db.execute(`CREATE TABLE IF NOT EXISTS images (id TEXT PRIMARY KEY, mime TEXT DEFAULT 'image/jpeg', data BLOB)`);
+
+  // Auto-migrate for existing tables that lack 'calories' column
+  try {
+    const tableInfo = await db.execute('PRAGMA table_info(menu_items)');
+    const hasCalories = tableInfo.rows.some((row) => row.name === 'calories');
+    if (!hasCalories) {
+      await db.execute('ALTER TABLE menu_items ADD COLUMN calories INTEGER DEFAULT 0');
+    }
+  } catch (err) {
+    console.error('Migration error:', err);
+  }
 }
 
 const num = (v) => (typeof v === 'bigint' ? Number(v) : v);
@@ -34,6 +45,7 @@ function rowToItem(r) {
     id: r.id, name: r.name, description: r.description, price: num(r.price), category: r.category, image: r.image,
     isPopular: !!num(r.is_popular), isSpicy: !!num(r.is_spicy), isVegetarian: !!num(r.is_vegetarian),
     customizable: !!num(r.customizable), ingredients: safeParse(r.ingredients, []), allergens: safeParse(r.allergens, []),
+    calories: r.calories !== undefined ? num(r.calories) : 0,
   };
 }
 
@@ -81,14 +93,16 @@ export async function getSettings() {
 // ---- Item writes ----
 export async function upsertItem(item) {
   await db.execute({
-    sql: `INSERT INTO menu_items (id,name,description,price,category,image,is_popular,is_spicy,is_vegetarian,customizable,ingredients,allergens,sort_order)
-          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+    sql: `INSERT INTO menu_items (id,name,description,price,category,image,is_popular,is_spicy,is_vegetarian,customizable,ingredients,allergens,sort_order,calories)
+          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
           ON CONFLICT(id) DO UPDATE SET name=excluded.name,description=excluded.description,price=excluded.price,category=excluded.category,
             image=excluded.image,is_popular=excluded.is_popular,is_spicy=excluded.is_spicy,is_vegetarian=excluded.is_vegetarian,
-            customizable=excluded.customizable,ingredients=excluded.ingredients,allergens=excluded.allergens,sort_order=excluded.sort_order`,
+            customizable=excluded.customizable,ingredients=excluded.ingredients,allergens=excluded.allergens,sort_order=excluded.sort_order,
+            calories=excluded.calories`,
     args: [item.id, item.name ?? '', item.description ?? '', Math.round(Number(item.price) || 0), item.category ?? '', item.image ?? '',
       item.isPopular ? 1 : 0, item.isSpicy ? 1 : 0, item.isVegetarian ? 1 : 0, item.customizable ? 1 : 0,
-      JSON.stringify(item.ingredients ?? []), JSON.stringify(item.allergens ?? []), Number(item.sortOrder ?? item.sort_order ?? 0)],
+      JSON.stringify(item.ingredients ?? []), JSON.stringify(item.allergens ?? []), Number(item.sortOrder ?? item.sort_order ?? 0),
+      Number(item.calories ?? 0)],
   });
   const r = (await db.execute({ sql: 'SELECT * FROM menu_items WHERE id = ?', args: [item.id] })).rows[0];
   return r ? rowToItem(r) : null;

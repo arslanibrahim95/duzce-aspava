@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import {
   init, getMenu, getSettings, upsertItem, deleteItem, bulkUpdatePrices,
   upsertCategory, deleteCategory, reorderCategories, setSetting,
-  getAdminByEmail, recordView, putImage, getImage,
+  getAdminByEmail, recordView, putImage, getImage, upsertAdmin,
 } from './db.js';
 import { seedIfEmpty } from './seed-runtime.js';
 
@@ -27,6 +27,22 @@ if (PROD && !process.env.JWT_SECRET) {
 
 const app = express();
 app.set('trust proxy', 1); // Caddy/Render reverse proxy arkasında gerçek istemci IP'si için
+
+// Güvenlik Başlıkları Middleware'i
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: /img/ https:; connect-src 'self';"
+  );
+  if (PROD) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  }
+  next();
+});
+
 app.use(express.json({ limit: '2mb' }));
 
 // Brute-force koruması: IP başına 10 dakikada en fazla 5 başarısız giriş denemesi.
@@ -99,7 +115,8 @@ app.post('/api/login', loginLimiter, wrap(async (req, res) => {
   }
   loginFails.delete(req.ip);
   const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '30d' });
-  res.json({ token, email: user.email });
+  const isDefaultPassword = await bcrypt.compare('aspava1234', user.password_hash);
+  res.json({ token, email: user.email, isDefaultPassword });
 }));
 
 // ---- Admin: items ----
@@ -121,6 +138,31 @@ app.put('/api/categories', requireAuth, wrap(async (req, res) => { await reorder
 app.put('/api/settings', requireAuth, wrap(async (req, res) => {
   for (const [k, v] of Object.entries(req.body || {})) await setSetting(k, v);
   res.json(await getSettings());
+}));
+
+// ---- Admin: status and password change ----
+app.get('/api/admin/status', requireAuth, wrap(async (req, res) => {
+  const user = await getAdminByEmail(req.admin.email);
+  if (!user) return res.status(404).json({ error: 'Yönetici bulunamadı' });
+  const isDefaultPassword = await bcrypt.compare('aspava1234', user.password_hash);
+  res.json({ email: user.email, isDefaultPassword });
+}));
+
+app.post('/api/admin/change-password', requireAuth, wrap(async (req, res) => {
+  const { currentPassword, newPassword } = req.body || {};
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ error: 'Mevcut şifre ve yeni şifre gereklidir.' });
+  }
+  if (String(newPassword).length < 6) {
+    return res.status(400).json({ error: 'Yeni şifre en az 6 karakter olmalıdır.' });
+  }
+  const user = await getAdminByEmail(req.admin.email);
+  if (!user || !(await bcrypt.compare(String(currentPassword), user.password_hash))) {
+    return res.status(400).json({ error: 'Mevcut şifre hatalı.' });
+  }
+  const newHash = await bcrypt.hash(String(newPassword), 10);
+  await upsertAdmin(user.email, newHash);
+  res.json({ ok: true });
 }));
 
 // ---- Admin: image upload (stored in DB) ----

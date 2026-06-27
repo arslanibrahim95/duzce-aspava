@@ -15,6 +15,7 @@ import {
   ShieldAlert,
   ChevronDown,
   Gift,
+  ArrowUp,
 } from 'lucide-react';
 
 import { MenuItem, Category } from './types';
@@ -26,11 +27,11 @@ import AdminDashboard from './components/AdminDashboard';
 import LuckyCombo from './components/LuckyCombo';
 
 const FREE_TREATS = [
-  { title: 'Patates Tava', detail: 'Sıcak & Çıtır', emoji: '🍟' },
-  { title: 'Sarımsaklı Cacık', detail: 'Süzme Yoğurtlu', emoji: '🥣' },
-  { title: 'Mevsim Salata', detail: 'Nar Ekşili', emoji: '🥗' },
-  { title: 'İrmik Helvası', detail: 'Dondurmalı', emoji: '🍮' },
-  { title: 'Demleme Çay', detail: 'Sınırsız İkram', emoji: '☕' },
+  { title: 'Patates Tava', detail: 'Sıcak & Çıtır', emoji: '🍟', calories: 220 },
+  { title: 'Sarımsaklı Cacık', detail: 'Süzme Yoğurtlu', emoji: '🥣', calories: 75 },
+  { title: 'Mevsim Salata', detail: 'Nar Ekşili', emoji: '🥗', calories: 45 },
+  { title: 'İrmik Helvası', detail: 'Dondurmalı', emoji: '🍮', calories: 280 },
+  { title: 'Demleme Çay', detail: 'Sınırsız İkram', emoji: '☕', calories: 0 },
 ];
 
 const ALLERGENS = [
@@ -59,6 +60,23 @@ export default function App() {
   const [isBackofficeOpen, setIsBackofficeOpen] = useState(false);
   const [isComboOpen, setIsComboOpen] = useState(false);
   const [globalNotice, setGlobalNotice] = useState<string | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      setShowScrollTop(currentScroll > 300);
+      if (totalScroll > 0) {
+        setScrollProgress(currentScroll / totalScroll);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const showNotice = (msg: string) => {
     setGlobalNotice(msg);
@@ -167,15 +185,15 @@ export default function App() {
         {/* Header */}
         <header className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-brand text-on-brand rounded-2xl flex items-center justify-center font-display font-black text-2xl shadow-lg shrink-0">
+            <div className="w-12 h-12 bg-brand text-on-brand rounded-2xl flex items-center justify-center font-display font-bold text-2xl shadow-lg shrink-0">
               A
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-display font-black tracking-tight leading-none flex items-baseline gap-2">
+              <h1 className="text-2xl sm:text-3xl font-display font-bold tracking-tight leading-none flex items-baseline gap-2">
                 ASPAVA
-                <span className="text-sm font-display italic font-medium text-gold">Düzce</span>
+                <span className="text-base font-display italic font-semibold text-gold">Düzce</span>
               </h1>
-              <p className="text-[12px] text-ink-faint mt-1">Seçkin Meze &amp; Enfes Kebap · Ankara Usulü</p>
+              <p className="text-[13px] text-ink-faint mt-1.5">Seçkin Meze &amp; Enfes Kebap · Ankara Usulü</p>
             </div>
           </div>
 
@@ -192,8 +210,8 @@ export default function App() {
                 <Gift className="w-4.5 h-4.5" />
               </span>
               <div>
-                <span className="text-sm font-display font-bold text-ink block">Sınırsız &amp; Ücretsiz İkramlarımız</span>
-                <span className="text-[12px] text-ink-faint">Her ana yemeğin yanında 5 farklı Ankara usulü ikram</span>
+                <span className="text-base font-sans font-semibold text-ink block">Sınırsız &amp; Ücretsiz İkramlarımız</span>
+                <span className="text-[12px] text-ink-faint mt-0.5">Her ana yemeğin yanında 5 farklı Ankara usulü ikram</span>
               </div>
             </div>
             <ChevronDown className={`w-5 h-5 text-ink-faint transition-transform shrink-0 ${isPromoOpen ? 'rotate-180' : ''}`} />
@@ -210,10 +228,15 @@ export default function App() {
               >
                 <div className="p-4 pt-0 grid grid-cols-2 sm:grid-cols-5 gap-2.5">
                   {FREE_TREATS.map((t, i) => (
-                    <div key={i} className="bg-card-2 border border-line rounded-xl p-3 text-center">
-                      <span className="text-2xl block">{t.emoji}</span>
-                      <span className="text-[12.5px] font-semibold text-ink block mt-1.5">{t.title}</span>
-                      <span className="text-[11px] text-ink-faint block">{t.detail}</span>
+                    <div key={i} className="bg-card-2 border border-line rounded-xl p-3 text-center flex flex-col justify-between min-h-[110px]">
+                      <div>
+                        <span className="text-2xl block">{t.emoji}</span>
+                        <span className="text-[12.5px] font-semibold text-ink block mt-1.5">{t.title}</span>
+                        <span className="text-[11px] text-ink-faint block">{t.detail}</span>
+                      </div>
+                      <span className="text-[10px] font-medium text-brand mt-1.5 block">
+                        ⚡ {t.calories} kcal
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -230,8 +253,8 @@ export default function App() {
           <div className="flex items-center gap-3">
             <span className="text-2xl">🎰</span>
             <div className="text-left">
-              <span className="text-sm font-display font-bold text-ink block">Şanslı Kombin'i Çevir</span>
-              <span className="text-[12px] text-ink-faint">Bugüne özel ana yemek + içecek önerisi — dene şansını!</span>
+              <span className="text-base font-sans font-semibold text-ink block">Şanslı Kombin'i Çevir</span>
+              <span className="text-[12px] text-ink-faint mt-0.5">Bugüne özel ana yemek + içecek önerisi — dene şansını!</span>
             </div>
           </div>
           <span className="text-[12px] font-bold text-brand bg-brand/10 border border-brand/20 px-3 py-1.5 rounded-full whitespace-nowrap group-hover:bg-brand group-hover:text-on-brand transition shrink-0">
@@ -239,15 +262,16 @@ export default function App() {
           </span>
         </button>
 
-        {/* Categories — wrap on mobile so all are visible without horizontal scrolling */}
-        <div className="flex flex-wrap gap-2">
+        {/* Categories — single horizontal row with scroll and fade gradient */}
+        <div className="relative -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex flex-row overflow-x-auto scrollbar-none gap-2.5 pb-2">
             {navCategories.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => handleCategorySelect(cat.id)}
-                  className={`cursor-pointer px-4 sm:px-5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 border ${
+                  className={`cursor-pointer px-4.5 py-2.5 rounded-full text-[13px] sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 border shrink-0 ${
                     isActive
                       ? 'bg-brand text-on-brand border-transparent shadow-md'
                       : 'bg-card text-ink-soft border-line hover:border-brand/40 hover:text-ink'
@@ -257,6 +281,9 @@ export default function App() {
                 </button>
               );
             })}
+          </div>
+          {/* Fade gradient overlay at the right edge on mobile */}
+          <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-page to-transparent pointer-events-none z-10 block sm:hidden" />
         </div>
 
         {/* Search */}
@@ -292,8 +319,8 @@ export default function App() {
                 <ShieldAlert className="w-4.5 h-4.5" />
               </span>
               <div>
-                <span className="text-sm font-display font-bold text-ink block">Alerjen Filtresi</span>
-                <span className="text-[12px] text-ink-faint">
+                <span className="text-base font-sans font-semibold text-ink block">Alerjen Filtresi</span>
+                <span className="text-[12px] text-ink-faint mt-0.5">
                   {avoidAllergens.length > 0
                     ? `${avoidAllergens.length} hassasiyet seçili · ${allergenHiddenCount} ürün gizli`
                     : 'Hassasiyet duyduğunuz gıdaları gizleyin'}
@@ -412,7 +439,7 @@ export default function App() {
         <footer className="border-t border-line pt-8 pb-4 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-2.5">
-              <h4 className="text-sm font-display font-bold text-ink">Düzce Aspava</h4>
+              <h4 className="text-[11px] font-sans font-bold uppercase tracking-wider text-ink-faint">Düzce Aspava</h4>
               <p className="text-[13px] text-ink-soft leading-relaxed">
                 Ankara'nın meşhur fırın esintisini her dilim ve dürüme katıyoruz. <strong className="text-ink font-semibold">Royal Gold AVM</strong>'deki şubemizde sizleri ağırlamaktan mutluluk duyarız.
               </p>
@@ -422,7 +449,7 @@ export default function App() {
               </div>
             </div>
             <div className="space-y-2.5">
-              <h4 className="text-sm font-display font-bold text-ink">İletişim</h4>
+              <h4 className="text-[11px] font-sans font-bold uppercase tracking-wider text-ink-faint">İletişim</h4>
               <p className="text-[13px] text-ink-soft leading-relaxed">
                 Rezervasyon ve bilgi için bizi arayabilirsiniz.
               </p>
@@ -432,7 +459,7 @@ export default function App() {
               </div>
             </div>
             <div className="space-y-2.5">
-              <h4 className="text-sm font-display font-bold text-ink">Çalışma Saatleri</h4>
+              <h4 className="text-[11px] font-sans font-bold uppercase tracking-wider text-ink-faint">Çalışma Saatleri</h4>
               <p className="text-[13px] text-ink-soft leading-relaxed">
                 Köz ateşimiz hiç sönmez, çayımız hiç soğumaz.
               </p>
@@ -529,6 +556,41 @@ export default function App() {
               </div>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Scroll to top button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-22 right-6 z-40 cursor-pointer w-12 h-12 rounded-full bg-card shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 text-brand"
+            title="Yukarı Çık"
+          >
+            <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 48 48">
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                className="stroke-line fill-none"
+                strokeWidth="2.5"
+              />
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                className="stroke-brand fill-none transition-all duration-75"
+                strokeWidth="2.5"
+                strokeDasharray="138.2"
+                strokeDashoffset={138.2 - (scrollProgress * 138.2)}
+                strokeLinecap="round"
+              />
+            </svg>
+            <ArrowUp className="w-4.5 h-4.5 relative z-10 text-brand" />
+          </motion.button>
         )}
       </AnimatePresence>
 

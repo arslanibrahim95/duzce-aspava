@@ -53,7 +53,7 @@ export async function fetchSettings(): Promise<Record<string, string>> {
 }
 
 // ---- Auth ----
-export async function login(email: string, password: string): Promise<void> {
+export async function login(email: string, password: string): Promise<{ token: string; email: string; isDefaultPassword: boolean }> {
   const data = await json(
     await fetch('/api/login', {
       method: 'POST',
@@ -62,6 +62,21 @@ export async function login(email: string, password: string): Promise<void> {
     })
   );
   setToken(data.token);
+  return data;
+}
+
+export async function fetchAdminStatus(): Promise<{ email: string; isDefaultPassword: boolean }> {
+  return json(await fetch('/api/admin/status', { headers: authHeaders() }));
+}
+
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  await json(
+    await fetch('/api/admin/change-password', {
+      method: 'POST',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ currentPassword, newPassword }),
+    })
+  );
 }
 
 // ---- Admin: items ----

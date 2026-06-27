@@ -4,6 +4,7 @@ export const MENU_ITEMS: MenuItem[] = [
   // ==================== KEBAPLAR ====================
   {
     id: 'kebap-adana',
+    calories: 680,
     name: 'Adana Kebap',
     description: 'Zırh kıymasının ustaca acılı hali; köz biber ve domatesle.',
     price: 690,
@@ -17,6 +18,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-urfa',
+    calories: 660,
     name: 'Urfa Kebap',
     description: "Adana'nın acısız hali; zırh kıymasının saf ve dengeli tadı.",
     price: 690,
@@ -29,6 +31,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-beyti',
+    calories: 850,
     name: 'Beyti Kebap',
     description: 'Baharatlı zırh kıyması lavaşa sarılı; tereyağlı domates sosu ve süzme yoğurtla.',
     price: 730,
@@ -41,6 +44,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-patlican',
+    calories: 620,
     name: 'Patlıcanlı Kebap',
     description: 'Taze patlıcan ve zırh kıyması, şişte mangal lezzetiyle.',
     price: 770,
@@ -53,6 +57,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-copsis',
+    calories: 580,
     name: 'Çöp Şiş',
     description: 'Sütle marine kuzu eti, mangalda nar gibi kızaran yumuşacık lokmalar.',
     price: 830,
@@ -65,6 +70,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-kuzusis',
+    calories: 640,
     name: 'Kuzu Şiş',
     description: 'Meşe ateşinde kendi yağıyla pişen, sütle terbiyeli yumuşacık kuzu but.',
     price: 830,
@@ -77,6 +83,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-cigersis',
+    calories: 520,
     name: 'Ciğer Şiş',
     description: 'Kuyruk yağıyla lezzetlenen taze kuzu ciğeri, sumaklı soğan piyazıyla.',
     price: 740,
@@ -88,6 +95,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-tavuksis',
+    calories: 480,
     name: 'Tavuk Şiş',
     description: 'Marine edilip dinlendirilmiş tavuk göğsü; dışı kızarık, içi sulu.',
     price: 630,
@@ -99,6 +107,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-kanat',
+    calories: 550,
     name: 'Tavuk Kanat',
     description: 'Marine kanatlar; mangalda dışı çıtır, içi sulu, nar gibi kızarmış.',
     price: 650,
@@ -110,6 +119,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-alinazik-kuzu',
+    calories: 780,
     name: 'Ali Nazik Kuzu',
     description: 'Köz patlıcan ve süzme yoğurt üzerinde, tereyağlı lokum kuzu parçaları.',
     price: 870,
@@ -122,6 +132,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kebap-alinazik-dana',
+    calories: 760,
     name: 'Ali Nazik Dana',
     description: 'Közlenmiş patlıcan beğendi üzerinde, ağır ateşte sotelenmiş yumuşacık dana.',
     price: 870,
@@ -135,6 +146,7 @@ export const MENU_ITEMS: MenuItem[] = [
   // ==================== DÖNERLER ====================
   {
     id: 'doner-iskender',
+    calories: 750,
     name: 'İskender',
     description: 'Sıcak pide üzerinde yaprak döner, kızgın tereyağı, kıvamlı yoğurt ve domates sosu.',
     price: 720,
@@ -147,6 +159,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'doner-simsek-iskender',
+    calories: 920,
     name: 'Şimşek İskender',
     description: 'Özel sos ve bol tereyağıyla, mekana özel imza İskender tabağı.',
     price: 740,
@@ -158,6 +171,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'doner-kebap',
+    calories: 680,
     name: 'Döner Kebap',
     description: 'Odun ateşinde dönen %100 yaprak et; tırnak pide ve köz sebzeyle.',
     price: 680,
@@ -169,6 +183,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'doner-durum',
+    calories: 540,
     name: 'Döner Dürüm',
     description: 'İnce taze lavaşa sarılı döner; isteğe göre domates ve soğan piyazıyla.',
     price: 680,
@@ -180,6 +195,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'doner-durum-beyti-kasar',
+    calories: 840,
     name: 'Döner Dürüm Beyti Kaşarlı',
     description: 'Beyti usulü dürüm; sıcacık sos ve uzayan kaşarla.',
     price: 730,
@@ -191,6 +207,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'doner-durum-ssk',
+    calories: 720,
     name: 'Döner Dürüm SSK',
     description: 'Sos, soğan ve eriyen kaşar; bol malzemeli efsane dürüm.',
     price: 690,
@@ -205,6 +222,7 @@ export const MENU_ITEMS: MenuItem[] = [
   // ==================== PİDELER ====================
   {
     id: 'pide-kiymali',
+    calories: 680,
     name: 'Kıymalı Pide',
     description: 'Baharatlı dana kıyma, odun fırınında çıtır çıtır pişen ince hamurun üzerinde.',
     price: 530,
@@ -216,6 +234,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kasarli',
+    calories: 710,
     name: 'Kaşarlı Pide',
     description: 'Çıtır hamur üzerinde, altın rengini alana dek fırınlanmış bol kaşar.',
     price: 530,
@@ -227,6 +246,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kusbasili',
+    calories: 730,
     name: 'Kuşbaşılı Pide',
     description: 'Yumuşacık kuşbaşı et ve taze sebze, odun fırınından.',
     price: 580,
@@ -238,6 +258,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-karisik',
+    calories: 820,
     name: 'Karışık Pide',
     description: 'Kıyma, kuşbaşı, sucuk ve kaşar; hepsi tek çıtır hamurda.',
     price: 590,
@@ -250,6 +271,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kasarli-sucuklu',
+    calories: 850,
     name: 'Kaşarlı Sucuklu Pide',
     description: 'Baharatlı dana sucuk ve uzayan kaşarın fırın sıcağındaki uyumu.',
     price: 590,
@@ -261,6 +283,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kiyma-kasarli',
+    calories: 790,
     name: 'Kıyma Kaşarlı Pide',
     description: 'Baharatlı kıymanın üzerinde, fırında eriyip uzayan bol kaşar.',
     price: 540,
@@ -272,6 +295,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kusbasi-kasarli',
+    calories: 810,
     name: 'Kuşbaşı Kaşarlı Pide',
     description: 'İri kuşbaşı et ve eriyen kaşar, taş fırında bir arada.',
     price: 590,
@@ -283,6 +307,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-tavuklu',
+    calories: 620,
     name: 'Tavuklu Pide',
     description: 'Renkli biberlerle sotelenmiş tavuk; hafif ama doyurucu.',
     price: 590,
@@ -294,6 +319,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-mantarli',
+    calories: 590,
     name: 'Mantarlı Pide',
     description: 'Taze mantar ve eriyen kaşar; etsiz ama dolu dolu.',
     price: 530,
@@ -305,6 +331,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'pide-kapali-donerli',
+    calories: 780,
     name: 'Kapalı Dönerli Pide',
     description: 'Bafra usulü kapalı çıtır hamurun içinde, tereyağlı sıcak yaprak döner.',
     price: 650,
@@ -319,6 +346,7 @@ export const MENU_ITEMS: MenuItem[] = [
   // ==================== KİREMİTLER ====================
   {
     id: 'kiremit-kofte',
+    calories: 720,
     name: 'Kiremitte Köfte',
     description: 'Kendi suyunda pişen köfte; eriyen kaşar ve domates sosuyla cızırdayarak gelir.',
     price: 710,
@@ -330,6 +358,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kiremit-tavuk',
+    calories: 590,
     name: 'Kiremitte Tavuk',
     description: 'Yumuşacık tavuk ve mevsim sebzeleri, özel sosuyla kiremitte.',
     price: 670,
@@ -341,6 +370,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'kiremit-mantarli-kofte',
+    calories: 760,
     name: 'Kiremitte Mantarlı Köfte',
     description: 'Izgara köftenin sıcağında eriyen kaşar ve taze mantar.',
     price: 710,
@@ -354,6 +384,7 @@ export const MENU_ITEMS: MenuItem[] = [
   // ==================== İÇECEKLER ====================
   {
     id: 'icecek-kola',
+    calories: 138,
     name: 'Kola',
     description: 'Buz gibi serinletici kutu Coca-Cola Original (330ml).',
     price: 90,
@@ -364,6 +395,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-kola-zero',
+    calories: 0,
     name: 'Zero Kola',
     description: 'Sıfır şeker ve sıfır kalori kutu Coca-Cola Zero Sugar (330ml).',
     price: 90,
@@ -374,6 +406,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-fanta',
+    calories: 150,
     name: 'Fanta',
     description: 'Buz gibi lezzetli kutu Fanta Portakal gazlı içecek (330ml).',
     price: 90,
@@ -384,6 +417,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-sprite',
+    calories: 142,
     name: 'Sprite',
     description: 'Buz gibi yüksek ferahlatıcı mis kokulu gazlı içecek Sprite (330ml).',
     price: 90,
@@ -394,6 +428,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-uzay-kola',
+    calories: 130,
     name: 'Uzay Kola',
     description: 'Yerli üretim Uzay Kola; buz gibi servis edilen ekonomik kola keyfi.',
     price: 70,
@@ -404,6 +439,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-uzay-gazoz',
+    calories: 125,
     name: 'Uzay Gazoz',
     description: 'Yerli üretim Uzay Gazoz; nostaljik ve ferahlatıcı limonlu gazoz.',
     price: 70,
@@ -414,6 +450,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-uzay-portakal',
+    calories: 135,
     name: 'Uzay Portakal',
     description: 'Yerli üretim Uzay Portakal; buz gibi tatlı portakal aromalı gazlı içecek.',
     price: 70,
@@ -424,6 +461,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-ayran',
+    calories: 76,
     name: 'Ayran',
     description: 'Katkısız süzme yoğurt, kaya tuzu ve arıtılmış kaynak suyu ile çalkalanan nefis geleneksel yayık köpüklü ayranı.',
     price: 60,
@@ -436,6 +474,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-fusetea',
+    calories: 95,
     name: 'Fuse Tea',
     description: 'Buzlu çay keyfi; Şeftali veya Limon seçeneği taşıyan serin kutu içecek aroması.',
     price: 90,
@@ -446,6 +485,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-cappy',
+    calories: 148,
     name: 'Cappy Meyve Suyu',
     description: 'Doğal meyve püreleriyle zenginleşen kutu Cappy (Meyve Şöleni/Şeftali/Vişne seçeneği ile).',
     price: 90,
@@ -456,6 +496,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-sira',
+    calories: 95,
     name: 'Şıra',
     description: 'Özellikle yaprak döner ve kebapların yanında içimi muhteşem giden mor üzümden elde edilmiş fermente geleneksel Türk içeceği.',
     price: 80,
@@ -466,6 +507,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-salgam',
+    calories: 10,
     name: 'Şalgam',
     description: 'Doğal mor havuç ve şalgam turpu fermantasyonuyla elde edilen hakiki buz gibi tatlı acısız şalgam suyu.',
     price: 80,
@@ -476,6 +518,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-salgam-acili',
+    calories: 10,
     name: 'Acılı Şalgam',
     description: 'Doğal fermente edilmiş, üzerine usta yapımı acı süs biberi suyu ilave edilmiş tam acılı geleneksel şalgam suyu.',
     price: 80,
@@ -486,6 +529,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-limonata',
+    calories: 120,
     name: 'Limonata(hazır)',
     description: 'Taze sıkılmış limon suları ve taze limon kabuğu esanslarıyla hazırlanan, ferahlatıcı naneli soğuk lezzet.',
     price: 80,
@@ -496,6 +540,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-soda',
+    calories: 0,
     name: 'Sade Soda',
     description: 'Buz gibi soğuk, yüksek mineralli Beypazarı doğal maden suyu (200ml).',
     price: 50,
@@ -506,6 +551,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: 'icecek-soda-meyveli',
+    calories: 60,
     name: 'Meyveli Soda',
     description: 'Doğal Beypazarı maden suyunun leziz meyve aromalarıyla buluştuğu gazlı içecek (Limon / Çilek / Elma seçenekleriyle).',
     price: 50,

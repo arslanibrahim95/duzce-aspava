@@ -12,6 +12,7 @@ export interface MenuItem {
   customizable?: boolean;
   allergens?: string[];
   views?: number;
+  calories?: number;
 }
 
 export interface Category {

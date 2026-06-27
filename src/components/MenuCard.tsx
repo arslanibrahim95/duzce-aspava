@@ -10,16 +10,48 @@ interface MenuCardProps {
 }
 
 const ALLERGEN_INFO: Record<string, { label: string; style: string }> = {
-  'glüten':     { label: 'Glüten 🌾',        style: 'bg-amber-500/10 border-amber-500/30 text-amber-500' },
-  'süt':        { label: 'Süt Ürünleri 🥛',  style: 'bg-sky-500/10 border-sky-500/30 text-sky-500' },
-  'kuruyemiş':  { label: 'Kuruyemiş 🥜',     style: 'bg-orange-500/10 border-orange-500/30 text-orange-500' },
-  'yumurta':    { label: 'Yumurta 🥚',       style: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-600' },
-  'susam':      { label: 'Susam 🥯',         style: 'bg-yellow-600/10 border-yellow-600/30 text-yellow-600' },
-  'soya':       { label: 'Soya 🫘',          style: 'bg-stone-500/10 border-stone-500/30 text-stone-500' },
-  'balık':      { label: 'Balık 🐟',         style: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-500' },
+  'glüten':     { label: 'Glüten 🌾',        style: 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400 font-semibold' },
+  'süt':        { label: 'Süt Ürünleri 🥛',  style: 'bg-sky-500/10 border-sky-500/30 text-sky-600 dark:text-sky-400 font-semibold' },
+  'kuruyemiş':  { label: 'Kuruyemiş 🥜',     style: 'bg-orange-500/10 border-orange-500/30 text-orange-600 dark:text-orange-400 font-semibold' },
+  'yumurta':    { label: 'Yumurta 🥚',       style: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-600 dark:text-yellow-400 font-semibold' },
+  'susam':      { label: 'Susam 🥯',         style: 'bg-yellow-600/10 border-yellow-600/30 text-yellow-700 dark:text-yellow-400 font-semibold' },
+  'soya':       { label: 'Soya 🫘',          style: 'bg-stone-500/10 border-stone-500/30 text-stone-600 dark:text-stone-400 font-semibold' },
+  'balık':      { label: 'Balık 🐟',         style: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-semibold' },
+  'alkol':      { label: 'Alkol İçerir 🍷',   style: 'bg-purple-500/15 border-purple-500/40 text-purple-600 dark:text-purple-400 font-bold uppercase text-[11px] tracking-wider px-2.5' },
+  'domuz':      { label: 'Domuz Eti/Bileşeni 🐷', style: 'bg-rose-500/20 border-rose-500/50 text-rose-600 dark:text-rose-400 font-bold uppercase text-[11px] tracking-wider px-2.5 animate-pulse' },
 };
 
 const allergenShort = (a: string) => (ALLERGEN_INFO[a]?.label ?? a);
+
+// Helper function to color-code and highlight ingredients containing allergens/alcohol/pork
+function getIngredientStyle(ing: string): string {
+  const lower = ing.toLowerCase();
+  
+  // Pork or Alcohol (High regulatory warnings)
+  if (lower.includes('domuz') || lower.includes('jambon')) {
+    return 'bg-rose-500/15 border-rose-500/40 text-rose-600 dark:text-rose-400 font-bold ring-1 ring-rose-500/20';
+  }
+  if (lower.includes('alkol') || lower.includes('şarap') || lower.includes('bira') || lower.includes('likör')) {
+    return 'bg-purple-500/15 border-purple-500/40 text-purple-600 dark:text-purple-400 font-bold ring-1 ring-purple-500/20';
+  }
+  
+  // Common allergens matching keywords
+  const allergenKeywords = [
+    'glüten', 'gluten', 'un', 'buğday', 'lavaş', 'pide', 'ekmek',
+    'süt', 'peynir', 'yoğurt', 'tereyağ', 'kaymak', 'krema',
+    'fıstık', 'ceviz', 'fındık', 'badem', 'kuruyemiş',
+    'yumurta',
+    'susam',
+    'soya',
+    'balık'
+  ];
+  
+  if (allergenKeywords.some(kw => lower.includes(kw))) {
+    return 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400 font-semibold';
+  }
+  
+  return 'bg-card-2 border-line text-ink-soft';
+}
 
 // Optional preferences a guest can verbally request from the waiter.
 function buildPreferences(item: MenuItem): { label: string; extra?: string }[] {
@@ -117,7 +149,7 @@ export default function MenuCard({ item }: MenuCardProps) {
               <span className="text-[10px] font-semibold text-ink-faint uppercase tracking-wide block mb-1.5">İçindekiler</span>
               <div className="flex flex-wrap gap-1.5">
                 {item.ingredients.map((ing, k) => (
-                  <span key={k} className="text-[11px] text-ink-soft bg-card-2 border border-line px-2 py-0.5 rounded-full">
+                  <span key={k} className={`px-2 py-0.5 rounded-full border transition ${getIngredientStyle(ing)}`}>
                     {ing}
                   </span>
                 ))}
@@ -129,7 +161,7 @@ export default function MenuCard({ item }: MenuCardProps) {
           {item.allergens && item.allergens.length > 0 && (
             <div className="mt-2.5">
               <span className="text-[11px] text-ink-faint">
-                ⚠️ Alerjen: <span className="text-ink-soft">{item.allergens.map(allergenShort).join(', ')}</span>
+                ⚠️ Alerjen/Uyarı: <span className="text-ink-soft font-medium">{item.allergens.map(allergenShort).join(', ')}</span>
               </span>
             </div>
           )}
@@ -137,10 +169,17 @@ export default function MenuCard({ item }: MenuCardProps) {
           {/* Footer: price + action */}
           <div className="mt-auto pt-3.5 border-t border-line/60 flex items-end justify-between">
             <div className="leading-none">
-              <span className="text-[10px] text-ink-faint uppercase tracking-wide block mb-1">Porsiyon Fiyatı</span>
-              <span className="text-xl font-display font-bold text-brand">
-                {item.price > 0 ? `${item.price} ₺` : 'İkram'}
-              </span>
+              <span className="text-[11px] text-ink-faint font-medium mb-0.5 block">Porsiyon Fiyatı</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-xl font-display font-bold text-brand">
+                  {item.price > 0 ? `${item.price} ₺` : 'İkram'}
+                </span>
+                {item.calories > 0 && (
+                  <span className="text-[12px] text-ink-soft bg-card-2 border border-line px-2 py-0.5 rounded-full font-medium" title="Enerji Değeri">
+                    ⚡ {item.calories} kcal
+                  </span>
+                )}
+              </div>
             </div>
             <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink-soft group-hover:text-brand group-hover:gap-2.5 transition-all">
               Detayları Gör
@@ -198,7 +237,7 @@ export default function MenuCard({ item }: MenuCardProps) {
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-3">
                   <h4 className="text-2xl font-display font-bold text-white drop-shadow-md leading-tight">{item.name}</h4>
-                  <span className="shrink-0 inline-flex items-baseline bg-brand text-on-brand font-display font-bold px-3 py-1.5 rounded-full shadow-lg text-base">
+                  <span className="shrink-0 inline-flex items-baseline bg-brand text-on-brand font-sans font-bold px-3 py-1.5 rounded-full shadow-lg text-base">
                     {item.price > 0 ? `${item.price} ₺` : 'İKRAM'}
                   </span>
                 </div>
@@ -206,8 +245,8 @@ export default function MenuCard({ item }: MenuCardProps) {
 
               {/* Scroll content */}
               <div className="p-5 space-y-5 overflow-y-auto">
-                {(item.isPopular || item.isSpicy) && (
-                  <div className="flex gap-1.5">
+                {(item.isPopular || item.isSpicy || item.calories) && (
+                  <div className="flex flex-wrap gap-1.5">
                     {item.isPopular && (
                       <span className="flex items-center gap-1 bg-gold/15 text-gold border border-gold/30 text-[11px] font-semibold px-2.5 py-1 rounded-full">
                         <Star className="w-3 h-3 fill-current" /> En Sevilen
@@ -216,6 +255,11 @@ export default function MenuCard({ item }: MenuCardProps) {
                     {item.isSpicy && (
                       <span className="flex items-center gap-1 bg-red-500/10 text-red-500 border border-red-500/25 text-[11px] font-semibold px-2.5 py-1 rounded-full">
                         <Flame className="w-3 h-3 fill-current" /> Acılı
+                      </span>
+                    )}
+                    {item.calories && item.calories > 0 && (
+                      <span className="flex items-center gap-1 bg-brand/10 text-brand border border-brand/25 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                        ⚡ {item.calories} kcal (Kalori)
                       </span>
                     )}
                   </div>
@@ -229,7 +273,7 @@ export default function MenuCard({ item }: MenuCardProps) {
                     <span className="text-xs font-semibold text-ink-faint uppercase tracking-wider">İçindekiler</span>
                     <div className="flex flex-wrap gap-1.5">
                       {item.ingredients.map((ing, idx) => (
-                        <span key={idx} className="text-[13px] text-ink-soft bg-card-2 border border-line px-3 py-1 rounded-full">
+                        <span key={idx} className={`text-[13px] border px-3 py-1 rounded-full transition ${getIngredientStyle(ing)}`}>
                           {ing}
                         </span>
                       ))}

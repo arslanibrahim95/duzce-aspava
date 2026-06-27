@@ -18,14 +18,17 @@ npm run server:dev   # backend (8787)
 npm run dev          # vite (3000) — /api ve /uploads backend'e proxy'lenir
 ```
 
-### Yönetici girişi
+### Yönetici girişi ve güvenlik
 `.env` dosyasıyla (veya ortam değişkeniyle) belirleyin; yoksa varsayılan: `admin@aspava.local` / `aspava1234`.
 ```
 JWT_SECRET=uzun-rastgele-deger
 ADMIN_EMAIL=arkadas@ornek.com
 ADMIN_PASSWORD=guclu-sifre
 ```
-Panel: sağ üst **Panel** → e-posta/şifre ile giriş.
+Panel: Sağ alt **Yönetim** → e-posta/şifre ile giriş.
+
+> [!WARNING]
+> **Güvenlik Uyarısı**: Canlıya alırken varsayılan şifreyi (`aspava1234`) kullanmamalısınız. Panele giriş yaptıktan sonra **Ayarlar** sekmesi altındaki **"Yönetici Şifresini Değiştir"** formunu kullanarak şifrenizi güvenli bir şekilde değiştirebilirsiniz. Şifreniz varsayılan değerde kaldığı sürece panelde bir güvenlik uyarısı görüntülenecektir.
 
 ## Yayına alma (Fly.io — tek seferlik, birlikte yapılır)
 

@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent, ReactNode } from 'react';
 import { motion } from 'motion/react';
 import {
   X, Plus, Edit2, Trash2, Save, Settings, ChefHat, Layers, LogOut,
-  Search, Lock, Percent, FolderPlus, Star, Flame,
+  Search, Lock, Percent, FolderPlus, Star, Flame, ShieldAlert,
 } from 'lucide-react';
 import {
   DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent,
@@ -28,6 +28,7 @@ const ALLERGEN_OPTIONS = [
   { name: 'glüten', label: 'Glüten 🌾' }, { name: 'süt', label: 'Süt 🥛' },
   { name: 'kuruyemiş', label: 'Kuruyemiş 🥜' }, { name: 'yumurta', label: 'Yumurta 🥚' },
   { name: 'susam', label: 'Susam 🥯' }, { name: 'soya', label: 'Soya 🫘' }, { name: 'balık', label: 'Balık 🐟' },
+  { name: 'alkol', label: 'Alkol İçerir 🍷' }, { name: 'domuz', label: 'Domuz Eti/Bileşeni 🐷' },
 ];
 const ICON_OPTIONS = ['Sparkles', 'Flame', 'Pizza', 'Coffee', 'Cookie', 'GlassWater', 'Gift', 'Layers', 'Utensils'];
 
@@ -39,7 +40,7 @@ type ItemForm = MenuItem & { ingredientInput: string };
 const emptyForm = (): ItemForm => ({
   id: '', name: '', description: '', price: 0, category: '', image: '',
   isPopular: false, isSpicy: false, isVegetarian: false, customizable: false,
-  ingredients: [], allergens: [], ingredientInput: '',
+  ingredients: [], allergens: [], ingredientInput: '', calories: 0,
 });
 
 export default function AdminDashboard({ items, categories, onChanged, onClose, onShowNotice, isLightMode = false }: AdminDashboardProps) {
@@ -48,6 +49,14 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
   const [password, setPassword] = useState('');
   const [loginErr, setLoginErr] = useState('');
   const [busy, setBusy] = useState(false);
+
+  const [isDefaultPassword, setIsDefaultPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [changePasswordError, setChangePasswordError] = useState('');
+  const [changePasswordSuccess, setChangePasswordSuccess] = useState('');
+  const [changingPasswordBusy, setChangingPasswordBusy] = useState(false);
 
   const [activeTab, setActiveTab] = useState<'menu' | 'categories' | 'settings'>('menu');
 
@@ -72,13 +81,22 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
     }).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    if (loggedIn) {
+      api.fetchAdminStatus()
+        .then((s) => setIsDefaultPassword(s.isDefaultPassword))
+        .catch(() => {});
+    }
+  }, [loggedIn]);
+
   // ---------- Auth ----------
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setBusy(true); setLoginErr('');
     try {
-      await api.login(email.trim(), password);
+      const data = await api.login(email.trim(), password);
       setLoggedIn(true);
+      setIsDefaultPassword(data.isDefaultPassword);
       onShowNotice('Giriş başarılı. 👋');
     } catch (err) {
       setLoginErr((err as Error).message || 'Giriş başarısız');
@@ -88,10 +106,43 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
   };
   const handleLogout = () => { api.clearToken(); setLoggedIn(false); onShowNotice('Çıkış yapıldı.'); };
 
+  // ---------- Password Change ----------
+  const handleChangePassword = async (e: FormEvent) => {
+    e.preventDefault();
+    setChangePasswordError('');
+    setChangePasswordSuccess('');
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      setChangePasswordError('Lütfen tüm alanları doldurun.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setChangePasswordError('Yeni şifreler eşleşmiyor.');
+      return;
+    }
+    if (newPassword.length < 6) {
+      setChangePasswordError('Yeni şifre en az 6 karakter olmalıdır.');
+      return;
+    }
+    setChangingPasswordBusy(true);
+    try {
+      await api.changePassword(currentPassword, newPassword);
+      setChangePasswordSuccess('Şifreniz başarıyla güncellendi. ✅');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setIsDefaultPassword(false);
+      onShowNotice('Yönetici şifresi güncellendi.');
+    } catch (err) {
+      setChangePasswordError((err as Error).message || 'Şifre güncellenemedi.');
+    } finally {
+      setChangingPasswordBusy(false);
+    }
+  };
+
   // ---------- Item CRUD ----------
   const openAdd = () => { setForm(emptyForm()); setIsNewItem(true); setEditing(true); };
   const openEdit = (it: MenuItem) => {
-    setForm({ ...it, ingredients: it.ingredients || [], allergens: it.allergens || [], ingredientInput: '' });
+    setForm({ ...it, ingredients: it.ingredients || [], allergens: it.allergens || [], ingredientInput: '', calories: it.calories || 0 });
     setIsNewItem(false); setEditing(true);
   };
   const addIngredient = () => {
@@ -114,6 +165,7 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
       ...rest,
       id: isNewItem ? `${slugify(form.name)}-${Date.now().toString(36).slice(-4)}` : form.id,
       price: Math.round(Number(form.price) || 0),
+      calories: Number(form.calories) || 0,
     };
     setBusy(true);
     try {
@@ -191,7 +243,7 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
         <form onSubmit={handleLogin} className="w-full max-w-sm space-y-4">
           <div className="text-center space-y-2">
             <div className="inline-flex p-3 bg-brand/10 text-brand rounded-2xl"><Lock className="w-6 h-6" /></div>
-            <h2 className="text-xl font-display font-bold text-ink">Yönetici Girişi</h2>
+            <h2 className="text-lg font-sans font-bold text-ink">Yönetici Girişi</h2>
             <p className="text-[13px] text-ink-faint">Menüyü düzenlemek için giriş yapın.</p>
           </div>
           <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-posta"
@@ -216,7 +268,7 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
         <div className="flex items-center gap-2.5">
           <span className="p-2 bg-brand/10 text-brand rounded-xl"><Settings className="w-5 h-5" /></span>
           <div>
-            <h2 className="text-sm font-display font-bold text-ink">Aspava Yönetim Paneli</h2>
+            <h2 className="text-[13px] font-sans font-bold text-ink">Aspava Yönetim Paneli</h2>
             <p className="text-[11px] text-ink-faint">Menü • Kategori • Ayarlar</p>
           </div>
         </div>
@@ -233,7 +285,17 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
       </div>
 
       {/* Body */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {isDefaultPassword && (
+          <div className="bg-red-500/10 border border-red-500/30 text-red-500 rounded-2xl p-4 flex items-start gap-3 mb-2">
+            <span className="p-2 bg-red-500/15 text-red-500 rounded-xl shrink-0"><ShieldAlert className="w-5 h-5" /></span>
+            <div>
+              <h4 className="text-sm font-bold">Güvenlik Uyarısı: Varsayılan Şifre Aktif</h4>
+              <p className="text-[12.5px] opacity-90 mt-0.5">Yönetici şifreniz hala varsayılan şifre ("aspava1234") olarak ayarlı. Sitenizin güvenliği için lütfen en kısa sürede <strong>Ayarlar</strong> sekmesinden şifrenizi değiştirin.</p>
+            </div>
+          </div>
+        )}
+
         {/* ===== MENU TAB ===== */}
         {activeTab === 'menu' && !editing && (
           <div className="space-y-3">
@@ -278,10 +340,10 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
         {activeTab === 'menu' && editing && (
           <form onSubmit={saveItem} className="space-y-4 max-w-2xl mx-auto">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-display font-bold text-ink">{isNewItem ? 'Yeni Ürün' : 'Ürünü Düzenle'}</h3>
+              <h3 className="text-sm font-sans font-semibold text-ink">{isNewItem ? 'Yeni Ürün' : 'Ürünü Düzenle'}</h3>
               <button type="button" onClick={() => setEditing(false)} className="text-[13px] text-ink-faint hover:text-ink cursor-pointer">← Listeye dön</button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
               <div className="sm:col-span-2 space-y-1.5">
                 <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Ürün Adı</label>
                 <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ör: Adana Kebap"
@@ -290,6 +352,11 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
               <div className="space-y-1.5">
                 <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Fiyat (₺)</label>
                 <input type="number" min="0" value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
+                  className="w-full text-sm bg-card-2 border border-line focus:border-brand rounded-xl px-3 py-2.5 text-ink focus:outline-none" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Kalori (kcal)</label>
+                <input type="number" min="0" value={form.calories || 0} onChange={(e) => setForm({ ...form, calories: Number(e.target.value) })} placeholder="Ör: 300"
                   className="w-full text-sm bg-card-2 border border-line focus:border-brand rounded-xl px-3 py-2.5 text-ink focus:outline-none" />
               </div>
             </div>
@@ -443,6 +510,38 @@ export default function AdminDashboard({ items, categories, onChanged, onClose, 
               </div>
               <button onClick={saveGoogle} className="bg-brand text-on-brand font-bold text-[13px] px-4 py-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer hover:bg-brand-2 transition"><Save className="w-4 h-4" /> Kaydet</button>
             </div>
+
+            {/* Şifre Değiştirme Formu */}
+            <form onSubmit={handleChangePassword} className="bg-card-2 border border-line rounded-2xl p-4 space-y-3">
+              <h3 className="text-sm font-display font-bold text-ink flex items-center gap-2"><Lock className="w-4 h-4 text-brand" /> Yönetici Şifresini Değiştir</h3>
+              <p className="text-[12px] text-ink-faint">Hesap güvenliğiniz için varsayılan şifreyi değiştirin ve düzenli aralıklarla güncelleyin.</p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Mevcut Şifre</label>
+                  <input type="password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="w-full text-sm bg-card border border-line focus:border-brand rounded-xl px-3 py-2.5 text-ink focus:outline-none" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Yeni Şifre</label>
+                  <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full text-sm bg-card border border-line focus:border-brand rounded-xl px-3 py-2.5 text-ink focus:outline-none" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-ink-faint uppercase tracking-wider">Yeni Şifre (Tekrar)</label>
+                  <input type="password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full text-sm bg-card border border-line focus:border-brand rounded-xl px-3 py-2.5 text-ink focus:outline-none" />
+                </div>
+              </div>
+
+              {changePasswordError && <p className="text-[12.5px] text-red-500">{changePasswordError}</p>}
+              {changePasswordSuccess && <p className="text-[12.5px] text-green-500 font-medium">{changePasswordSuccess}</p>}
+
+              <button type="submit" disabled={changingPasswordBusy}
+                className="bg-brand text-on-brand font-bold text-[13px] px-4 py-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer hover:bg-brand-2 transition disabled:opacity-60">
+                <Save className="w-4 h-4" /> {changingPasswordBusy ? 'Güncelleniyor…' : 'Şifreyi Güncelle'}
+              </button>
+            </form>
           </div>
         )}
       </div>

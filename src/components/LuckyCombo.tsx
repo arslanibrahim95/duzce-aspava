@@ -164,7 +164,7 @@ export default function LuckyCombo({ open, onClose, items }: LuckyComboProps) {
                     <span className="text-lg">{reward.emoji}</span> Ödül: {reward.label}
                   </div>
                 )}
-                <div className="text-3xl font-display font-black text-brand">
+                <div className="text-2xl font-display font-bold text-brand">
                   {discounted} ₺{reward?.discount ? <span className="text-base text-ink-faint line-through ml-2 font-bold">{baseTotal} ₺</span> : null}
                 </div>
                 <p className="text-[12px] text-ink-faint">+ 5 Ankara usulü ikram ücretsiz</p>
@@ -179,7 +179,7 @@ export default function LuckyCombo({ open, onClose, items }: LuckyComboProps) {
                   <div className="flex items-center gap-2.5">
                     <span className="p-2 bg-brand/15 text-brand rounded-xl">🎰</span>
                     <div>
-                      <h3 className="text-base font-display font-bold text-ink leading-tight">Şanslı Kombin</h3>
+                      <h3 className="text-base font-sans font-semibold text-ink leading-tight">Şanslı Kombin</h3>
                       <p className="text-[11px] text-ink-faint">Bugüne özel öneri — çevir, ödülü kap!</p>
                     </div>
                   </div>

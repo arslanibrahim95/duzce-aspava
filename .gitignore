@@ -8,3 +8,10 @@ data/
 *.log
 .env*
 !.env.example
+
+# Local tooling / runtime artifacts
+cloudflared.exe
+*.pid
+
+# Debug scripts containing sensitive credentials
+scripts/verify-password.js
